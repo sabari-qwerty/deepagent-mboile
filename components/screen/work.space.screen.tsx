@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { View } from "react-native";
-import { Devider } from "../common/devider";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
 import { WorkSpaceHeader } from "../header/work.space.header";
 
