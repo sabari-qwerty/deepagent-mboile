@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "684854449888",
+    "project_id": "deepagent-mobile-d4be2",
+    "storage_bucket": "deepagent-mobile-d4be2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684854449888:android:f5a65671d1b08bfbba6285",
+        "android_client_info": {
+          "package_name": "com.gozen.deepagent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa2pDmoiFsoqYzHoUfGv3UCkNjLL5KBHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

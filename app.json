@@ -1,22 +1,33 @@
 {
   "expo": {
-    "name": "deepagent",
-    "slug": "deepagent",
+    "name": "DeepAgent",
+    "slug": "DeepAgent",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "deepagent",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gozen.deepagent"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "package": "com.gozen.deepagent",
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 28,
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -25,18 +36,35 @@
     },
     "plugins": [
       "expo-router",
+
       [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
+          "imageWidth": 150,
+          "imageHeight": 150,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+
+      [
+        "react-native-auth0",
+        {
+          "domain": "optinly.auth0.com"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "48f23301-fef6-4351-a05f-9ff88ecaf80d"
+      }
     }
   }
 }
