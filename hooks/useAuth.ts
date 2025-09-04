@@ -45,12 +45,12 @@ export const useAuth = () => {
   };
 
   const handleLogout = async () => {
+    await clearSession();
+    await Storage.clear();
     setAccessToken(null);
     setAllWorkspaces(null);
     setActiveWorkspace(null);
     setActiveWorkspaceId(null);
-    await clearSession();
-    await Storage.clear();
   };
 
   return {
