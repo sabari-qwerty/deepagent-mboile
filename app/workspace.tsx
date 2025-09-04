@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 export default function Workspace() {
   const { handleLogout } = useAuth();
   return (
-    <CustomSafeAreaView background="black">
+    <CustomSafeAreaView background="blue">
       <View className="w-full h-full items-center justify-center">
         <TouchableOpacity onPress={() => handleLogout()}>
           <Text className="text-black">Logout</Text>
