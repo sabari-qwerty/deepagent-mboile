@@ -1,4 +1,3 @@
-import { Icons } from "@/constants/icons";
 import { cn } from "@/lib/utils/cn";
 import Checkbox from "expo-checkbox";
 import { FC } from "react";
@@ -37,13 +36,16 @@ export const WorkSpaceCard: FC<props> = ({
           )}
         >
           <FallBackImage imageUrl={imageUrl} />
+        </View>
+
+        <View>
+          <Text className="text-text-primary text-xl font-bold ">{name}</Text>
           {shared && (
-            <View className="absolute bottom-0 right-0  w-4 h-4 bg-white  rounded-md items-center justify-center">
-              <Icons.Group color="#06152d" size={12} />
-            </View>
+            <Text className="text-text-secondary text-[8px] bg-white w-[40px] rounded-md items-center justify-center px-2">
+              shared
+            </Text>
           )}
         </View>
-        <Text className="text-text-primary text-xl font-bold ">{name}</Text>
       </View>
 
       {isCheckbox && (

@@ -1,34 +1,38 @@
-import { services } from "@/services";
 import { localWorkspace, Workspace } from "@/types/type";
-import { useQuery } from "@tanstack/react-query";
-import { FC, useState } from "react";
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { FC } from "react";
+import {
+  ActivityIndicator,
+  FlatList,
+  Linking,
+  Pressable,
+  RefreshControl,
+  Text,
+  View,
+} from "react-native";
 import { WorkSpaceCard } from "../card/work.space.card";
 
-export const WorkspaceFlatList: FC = () => {
-  const { data, isLoading } = useQuery<Workspace[]>({
-    queryKey: ["workspace"],
-    queryFn: () => services.workspace.get(),
-  });
+interface props {
+  refetch: () => void;
+  isLoading: boolean;
+  data?: Workspace[];
+  tempWorkspace: localWorkspace[];
+  handleWorkspace: ({ workspace }: { workspace: localWorkspace }) => void;
+}
 
-  const [tempWorkspace, setTempWorkspace] = useState<localWorkspace[]>([]);
+// data && data.length > 0
 
-  const handleWorkspace = ({ workspace }: { workspace: localWorkspace }) => {
-    const isExist = tempWorkspace.find((item) => item.id === workspace.id);
-    if (isExist) {
-      setTempWorkspace((prev) =>
-        prev.filter((item) => item.id !== workspace.id)
-      );
-    } else {
-      setTempWorkspace((prev) => [...prev, workspace]);
-    }
-  };
-
+export const WorkspaceFlatList: FC<props> = ({
+  refetch,
+  isLoading,
+  data,
+  tempWorkspace,
+  handleWorkspace,
+}) => {
   return isLoading ? (
     <View className="flex-1 justify-center items-center">
       <ActivityIndicator color={"#2563eb"} size="large" />
     </View>
-  ) : (
+  ) : data && data.length > 0 ? (
     <FlatList
       data={data}
       keyExtractor={(item) => item._id}
@@ -38,8 +42,10 @@ export const WorkspaceFlatList: FC = () => {
           name={item.name}
           imageUrl={item.chatWidgeData.botProfile}
           isCheckbox
-          isSelected={true}
-          shared={true}
+          isSelected={
+            tempWorkspace.find((data) => data.id === item._id) ? true : false
+          }
+          shared={item.shared}
           handleWorkspace={() =>
             handleWorkspace({
               workspace: {
@@ -52,6 +58,18 @@ export const WorkspaceFlatList: FC = () => {
           }
         />
       )}
+      refreshControl={
+        <RefreshControl refreshing={isLoading} onRefresh={() => refetch()} />
+      }
     />
+  ) : (
+    <View className="flex-1 justify-center items-center gap-y-2">
+      <Text className="text-text-primary  font-bold">No Workspace founed</Text>
+      <Pressable
+        onPress={() => Linking.openURL("https://app.deepagent.gozen.io/")}
+      >
+        <Text className="text-primary font-bold">Create Workspace</Text>
+      </Pressable>
+    </View>
   );
 };
