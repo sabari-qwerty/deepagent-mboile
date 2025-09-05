@@ -4,6 +4,7 @@ import { StorageKeys } from "@/lib/utils/storage";
 import { services } from "@/services";
 import { localWorkspace, Workspace } from "@/types/type";
 import { useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { FC, useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
@@ -22,6 +23,14 @@ export const WorkSpaceScreen: FC = () => {
 
   const [allWorkspaces, setAllWorkspaces] = useStorage<localWorkspace[]>(
     StorageKeys.allWorkspaces
+  );
+
+  const [activeWorkspace, setActiveWorkspace] = useStorage<localWorkspace>(
+    StorageKeys.activeWorkspace
+  );
+
+  const [activeWorkspaceId, setActiveWorkspaceId] = useStorage<string | null>(
+    StorageKeys.activeWorkspaceId
   );
 
   const [tempWorkspace, setTempWorkspace] = useState<localWorkspace[]>(
@@ -57,11 +66,16 @@ export const WorkSpaceScreen: FC = () => {
   };
 
   const handleNext = () => {
+    setActiveWorkspaceId(tempWorkspace[0].id);
+    setActiveWorkspace(tempWorkspace[0]);
     setAllWorkspaces(tempWorkspace);
+    setTempWorkspace([]);
+    setIsNext(false);
+    router.replace("/(app)/(session)");
   };
 
   return (
-    <CustomSafeAreaView background="blue">
+    <CustomSafeAreaView background="blue" className="bg-white ">
       {isLoading ? (
         <View className="flex-1 w-full h-full justify-center items-center">
           <ActivityIndicator size="large" color="#2563eb" />
@@ -78,7 +92,7 @@ export const WorkSpaceScreen: FC = () => {
           <WorkspaceFlatList
             refetch={refetch}
             isLoading={isLoading}
-            data={data}
+            data={data?.filter((item) => item.status === "READY")}
             tempWorkspace={tempWorkspace}
             handleWorkspace={handleWorkspace}
           />

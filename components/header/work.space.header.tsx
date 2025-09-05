@@ -8,14 +8,18 @@ interface prop {
   handleNext: () => void;
 }
 
-export const WorkSpaceHeader: FC<prop> = ({ isNext, handleSelectAll }) => {
+export const WorkSpaceHeader: FC<prop> = ({
+  isNext,
+  handleSelectAll,
+  handleNext,
+}) => {
   return (
     <View className="w-full py-4 pb-0 flex  items-center gap-y-4">
       <View className="w-[95%] mx-atuo flex-row justify-between items-center">
         <Text className="text-text-primary text-xl font-bold">Workspace</Text>
 
         {isNext && (
-          <TouchableOpacity onPress={() => handleSelectAll()}>
+          <TouchableOpacity onPress={() => handleNext()}>
             <Text className="text-primary font-bold">Next</Text>
           </TouchableOpacity>
         )}

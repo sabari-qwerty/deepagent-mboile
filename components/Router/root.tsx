@@ -7,14 +7,18 @@ import Provider from "../provider";
 
 export const RootRouter: FC = () => {
   const [accessToken] = useStorage(StorageKeys.accessToken);
-
   const [isLoading, setIsLoading] = useState(true);
+  const [workspaceId] = useStorage(StorageKeys.activeWorkspaceId);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
   }, []);
+
+  console.log({
+    workspaceId,
+  });
 
   return (
     <Provider>
@@ -31,8 +35,17 @@ export const RootRouter: FC = () => {
           </Stack.Protected>
 
           {/* workspace page */}
-          <Stack.Protected guard={accessToken !== null && !isLoading}>
+          <Stack.Protected
+            guard={accessToken !== null && !isLoading && workspaceId === null}
+          >
             <Stack.Screen name="workspace" />
+          </Stack.Protected>
+
+          {/* session page */}
+          <Stack.Protected
+            guard={workspaceId !== null && !isLoading && accessToken !== null}
+          >
+            <Stack.Screen name="(app)" />
           </Stack.Protected>
         </Stack>
       </GestureHandlerRootView>

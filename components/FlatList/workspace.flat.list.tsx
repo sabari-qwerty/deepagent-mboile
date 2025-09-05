@@ -33,35 +33,49 @@ export const WorkspaceFlatList: FC<props> = ({
       <ActivityIndicator color={"#2563eb"} size="large" />
     </View>
   ) : data && data.length > 0 ? (
-    <FlatList
-      data={data}
-      keyExtractor={(item) => item._id}
-      renderItem={({ item }) => (
-        <WorkSpaceCard
-          id={item._id}
-          name={item.name}
-          imageUrl={item.chatWidgeData.botProfile}
-          isCheckbox
-          isSelected={
-            tempWorkspace.find((data) => data.id === item._id) ? true : false
-          }
-          shared={item.shared}
-          handleWorkspace={() =>
-            handleWorkspace({
-              workspace: {
-                id: item._id,
-                name: item.name,
-                imageUrl: item.chatWidgeData.botProfile,
-                shared: item.shared,
-              },
-            })
+    <View className="flex-1 w-full h-full">
+      <View className="flex-1">
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+            <WorkSpaceCard
+              id={item._id}
+              name={item.name}
+              imageUrl={item.chatWidgeData.botProfile}
+              isCheckbox
+              isSelected={
+                tempWorkspace.find((data) => data.id === item._id)
+                  ? true
+                  : false
+              }
+              shared={item.shared}
+              handleWorkspace={() =>
+                handleWorkspace({
+                  workspace: {
+                    id: item._id,
+                    name: item.name,
+                    imageUrl: item.chatWidgeData.botProfile,
+                    shared: item.shared,
+                  },
+                })
+              }
+            />
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={() => refetch()}
+            />
           }
         />
-      )}
-      refreshControl={
-        <RefreshControl refreshing={isLoading} onRefresh={() => refetch()} />
-      }
-    />
+      </View>
+      <View className="w-[95%] mx-auto py-2 items-center ">
+        <Text className="text-text-secondary/50 font-bold text-sm">
+          Only Show workspaces Status is Ready
+        </Text>
+      </View>
+    </View>
   ) : (
     <View className="flex-1 justify-center items-center gap-y-2">
       <Text className="text-text-primary  font-bold">No Workspace founed</Text>

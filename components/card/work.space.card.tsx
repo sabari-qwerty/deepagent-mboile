@@ -41,9 +41,9 @@ export const WorkSpaceCard: FC<props> = ({
         <View>
           <Text className="text-text-primary text-xl font-bold ">{name}</Text>
           {shared && (
-            <Text className="text-text-secondary text-[8px] bg-white w-[40px] rounded-md items-center justify-center px-2">
-              shared
-            </Text>
+            <View className="w-[40px] h-[12px] rounded-xl  items-center justify-center bg-primary/80">
+              <Text className="text-[8px] text-white font-bold">shared</Text>
+            </View>
           )}
         </View>
       </View>
