@@ -4,7 +4,7 @@ import { Devider } from "../common/devider";
 
 export const WorkSpaceHeader: FC = () => {
   return (
-    <View className="w-full py-4 flex  items-center gap-y-4">
+    <View className="w-full py-4 pb-0 flex  items-center gap-y-4">
       <View className="w-[95%] mx-atuo flex-row justify-between items-center">
         <Text className="text-text-primary text-xl font-bold">Workspace</Text>
         <TouchableOpacity className="p-2 ">
