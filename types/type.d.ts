@@ -52,3 +52,71 @@ type conversationFilterType =
   | "mentioned"
   | "openChats"
   | "unassigned";
+
+// ============================= CONTACT Payload =============================
+
+type options = "allMessage" | "priority";
+
+export interface ContactPayload {
+  knowledgeBaseId: string;
+  gobalFilter: conversationFilterType;
+  status: converstationStatusType;
+  option: options;
+  pageSize: number;
+  page: number;
+}
+
+// Conatact List Params
+
+interface ContactData {
+  _id: string;
+  startedAt: string;
+  updatedAt: string;
+  isUnread: boolean;
+  userData: UserData;
+  platform: platform;
+  priority: boolean;
+  status: string;
+  latestMessage: LatestMessage;
+}
+
+interface UserSummary {
+  email: any;
+  id: any;
+  name: any;
+  image_url: any;
+}
+
+interface sessionNote {
+  id: string;
+  note: string;
+  imageUrl: string;
+  timeStamp: string;
+}
+interface LatestMessage {
+  id: string;
+  sender: string;
+  user_summary?: UserSummary;
+  blocks: [Blocks, any[]];
+  timeStamp: string;
+  bot_summary?: BotSummary;
+  question?: string;
+  answer?: string;
+  attachments: {
+    url: string;
+    title: string;
+    fileExtension: string;
+    fileType: string;
+  }[];
+  questionTokens?: number;
+  answerTokens?: number;
+}
+
+interface ContactData {
+  pageParams: number[];
+  pages: ContactData[];
+}
+
+// ============================= Platform =============================
+
+type platform = "whatsapp" | "facebook" | "telegram" | "widget";
