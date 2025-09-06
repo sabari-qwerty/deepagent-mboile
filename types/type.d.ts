@@ -138,7 +138,6 @@ type conversationFilterType =
 
 type converstationStatusType = "opened" | "closed" | "snoozed" | "blocked";
 
-
 export type genericFiltersValues = Record<
   string,
   {
@@ -146,4 +145,31 @@ export type genericFiltersValues = Record<
     value: string;
     icon: ({ isActive }: { isActive: boolean }) => React.ReactNode;
   }
->
+>;
+
+// ============================= Bottom Sheet =============================
+
+export type bottomSheet = "status" | "gobalFilter" | "";
+
+
+
+// ============================= Status =============================
+
+export interface GetStatusResponse {
+  general: number;
+  mentioned: number;
+  openChats: number;
+  unassigned: number;
+}
+
+
+export interface GetStatusRequestResposne {
+  general: number;
+  mentioned: number;
+  "open-chats": number;
+  allMessage: number;
+  priority: number;
+  unassigned: number;
+}
+
+

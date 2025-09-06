@@ -17,7 +17,7 @@ export const Mentioned: FC<prop> = ({ onPress, status, filter }) => {
           {conversationFilter[filter].name} Conversations
         </Text>
 
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onPress}>
           <Text className="text-[#2563EB] font-semibold text-xs">{status}</Text>
         </TouchableOpacity>
       </View>

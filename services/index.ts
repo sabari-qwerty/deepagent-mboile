@@ -4,6 +4,7 @@
 // import getChat from "./contact/chat/get";
 // import { NewChat } from "./contact/chat/newChat";
 import contactGet from "./contact/get";
+import statusGet from "./contact/status/get";
 // import { getRecentPage } from "./contact/recentpage/get";
 // import { SearchContact } from "./contact/search/get";
 // import { updateStatus } from "./contact/status/update/update";
@@ -15,10 +16,10 @@ export const services = {
   workspace: {
     get: workspaceGet,
   },
-  // status: {
-  //   get: statusGet,
-  //   update: updateStatus,
-  // },
+  status: {
+    get: statusGet,
+    // update: updateStatus,
+  },
   contact: {
     get: contactGet,
     // chat: {

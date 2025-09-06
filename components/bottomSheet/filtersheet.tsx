@@ -1,5 +1,6 @@
 import { conversationFilter, converstationStatus } from "@/constants/filter";
 import {
+  bottomSheet,
   conversationFilterType,
   converstationStatusType,
   StatusOverViewResponse,
@@ -9,8 +10,6 @@ import { FC } from "react";
 import { FilterCard } from "../card/Filter.card";
 import { CustomBottomSheet } from "./sheet";
 import { CustomBottomSheetView } from "./view";
-
-type bottomSheet = "status" | "gobalFilter" | "";
 
 interface FilterSheetProps {
   bottomSheetRef: React.RefObject<BottomSheet | null>;
