@@ -3,6 +3,8 @@ import { FC } from "react";
 import { View } from "react-native";
 import { LogoutButton } from "../button/logout.button";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
+import { DrawerFlatList } from "../FlatList/darwer.flat.list";
+import { CustomDrawerHeader } from "../header/custom.drawer.header";
 
 export const CustomDrawer: FC<DrawerContentComponentProps> = ({
   navigation,
@@ -14,8 +16,11 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = ({
 
   return (
     <CustomSafeAreaView background="blue" className="flex-1  ">
-      <View className="flex-1 "></View>
-      <View className="py-2 border-t  border-border-primary">
+      <CustomDrawerHeader />
+      <View className="flex-1 ">
+        <DrawerFlatList close={close} />
+      </View>
+      <View className="py-4 border-t  border-border-primary">
         <LogoutButton close={close} />
       </View>
     </CustomSafeAreaView>
