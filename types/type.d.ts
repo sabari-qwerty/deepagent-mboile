@@ -173,3 +173,11 @@ export interface GetStatusRequestResposne {
 }
 
 
+// ============================= Search =============================
+
+export interface SearchPayload {
+  knowledgeBaseId: string;
+  conversation: string[];
+  tag: string[];
+  q: string;
+}

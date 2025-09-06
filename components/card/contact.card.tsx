@@ -7,7 +7,7 @@ import { PreviewMessage } from "../screen/contact/previewMessage";
 
 interface prop {
   item: ContactData;
-  onPress: () => {};
+  onPress: () => void;
 }
 
 export const ConatactCard: FC<prop> = ({ item, onPress }) => {

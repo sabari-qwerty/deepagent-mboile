@@ -97,3 +97,23 @@ export const ChatStatusChange = [
     deactiveColorCode: "#07142F",
   },
 ];
+
+
+export const searchFilter = [
+  {
+    lable: "Widget",
+    value: "widget",
+  },
+  {
+    lable: "WhatsApp",
+    value: "whatsApp",
+  },
+  {
+    lable: "Telegram",
+    value: "telegram",
+  },
+  {
+    lable: "Facebook",
+    value: "facebook",
+  },
+];

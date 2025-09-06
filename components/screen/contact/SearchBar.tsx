@@ -1,4 +1,5 @@
 import { Icons } from "@/constants/icons";
+import { router } from "expo-router";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -14,7 +15,9 @@ export const SearchBar: FC<prop> = ({ handleOpen }) => {
         style={{
           paddingLeft: 10,
         }}
-        onPress={() => {}}
+        onPress={() => {
+          router.push("/search");
+        }}
       >
         <Icons.SearchIcon />
         <View style={{ flex: 1 }} className="w-full  py-2 ">

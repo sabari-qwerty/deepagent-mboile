@@ -4,6 +4,7 @@
 // import getChat from "./contact/chat/get";
 // import { NewChat } from "./contact/chat/newChat";
 import contactGet from "./contact/get";
+import { SearchContact } from "./contact/search/get";
 import statusGet from "./contact/status/get";
 // import { getRecentPage } from "./contact/recentpage/get";
 // import { SearchContact } from "./contact/search/get";
@@ -38,8 +39,8 @@ export const services = {
     // viewedPage: {
     //   get: getRecentPage,
     // },
-    // search: {
-    //   get: SearchContact,
-    // },
+    search: {
+      get: SearchContact,
+    },
   },
 };
