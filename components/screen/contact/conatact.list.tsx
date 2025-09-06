@@ -16,9 +16,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { RefreshControl } from "react-native-gesture-handler";
 
 export const ContactList: FC = () => {
   const [activeFilter] = useStorage<string[] | null>(StorageKeys.activeFilter);
+  const [activeWorkspaceId] = useStorage(StorageKeys.activeWorkspaceId);
 
   const {
     data,
@@ -34,15 +36,20 @@ export const ContactList: FC = () => {
     queryFn: ({ pageParam = 1 }) =>
       services.contact.get({
         gobalFilter:
-          ((activeFilter as string[])[2] as conversationFilterType) ||
-          "general",
-        knowledgeBaseId: (activeFilter as string[])[1] || "",
+          ((
+            activeFilter as unknown as string[]
+          )[2] as conversationFilterType) || "general",
+        knowledgeBaseId:
+          (activeFilter as unknown as string[])[1] ||
+          (activeWorkspaceId as string) ||
+          "",
         option: "allMessage",
         page: pageParam as number,
         pageSize: 15,
         status:
-          ((activeFilter as string[])[3] as converstationStatusType) ||
-          "opened",
+          ((
+            activeFilter as unknown as string[]
+          )[3] as converstationStatusType) || "opened",
       }),
     getNextPageParam: (lastPage, allPages) => {
       // If the last page has 15 items, there might be more
@@ -51,11 +58,9 @@ export const ContactList: FC = () => {
     enabled: activeFilter !== null,
   });
 
-  console.log(data);
-
   return (
     <View className="w-[95%] mx-auto  h-full flex-1 ">
-      {isLoading || isFetching ? (
+      {isLoading || (!isFetchingNextPage && isFetching) ? (
         <View className="flex-1  justify-center items-center">
           <ActivityIndicator size="large" color="#0048e6" />
         </View>
@@ -72,6 +77,14 @@ export const ContactList: FC = () => {
           renderItem={({ item }) => (
             <ConatactCard item={item} onPress={() => ""} />
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={() => refetch()}
+            />
+          }
+          onEndReached={() => hasNextPage && fetchNextPage()}
+          onEndReachedThreshold={0.5}
         />
       )}
     </View>
