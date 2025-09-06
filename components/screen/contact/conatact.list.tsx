@@ -1,5 +1,7 @@
 import { ConatactCard } from "@/components/card/contact.card";
+import { useSocket } from "@/components/provider/socket";
 import { useStorage } from "@/hooks/useStorage";
+import { SessionUpdate } from "@/lib/utils/contactscreen/sessionupdate";
 import { StorageKeys } from "@/lib/utils/storage";
 import { services } from "@/services";
 import {
@@ -8,7 +10,7 @@ import {
   converstationStatusType,
 } from "@/types/type";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -21,6 +23,12 @@ import { RefreshControl } from "react-native-gesture-handler";
 export const ContactList: FC = () => {
   const [activeFilter] = useStorage<string[] | null>(StorageKeys.activeFilter);
   const [activeWorkspaceId] = useStorage(StorageKeys.activeWorkspaceId);
+
+  const { socket } = useSocket();
+
+  const [selectedContact, setSelectedContact] = useState<ContactData | null>(
+    null
+  );
 
   const {
     data,
@@ -55,8 +63,26 @@ export const ContactList: FC = () => {
       // If the last page has 15 items, there might be more
       return lastPage?.length === 15 ? allPages.length + 1 : undefined;
     },
-    enabled: activeFilter !== null,
+    enabled: String(activeFilter) !== "null" && activeFilter !== null,
   });
+
+  useEffect(() => {
+    if (socket === null && activeWorkspaceId == null && activeFilter === null)
+      return;
+
+    if (socket && activeWorkspaceId && activeFilter) {
+      socket.emit("onKnowledgeBaseJoin", {
+        knowledgeBaseId: String(activeWorkspaceId),
+      });
+
+      socket.on("onSessionUpdate", (payload: ContactData) => {
+        SessionUpdate({
+          currentKesy: activeFilter as string[],
+          payload,
+        });
+      });
+    }
+  }, [socket, data]);
 
   return (
     <View className="w-[95%] mx-auto  h-full flex-1 ">
