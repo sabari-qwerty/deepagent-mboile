@@ -120,3 +120,30 @@ interface ContactData {
 // ============================= Platform =============================
 
 type platform = "whatsapp" | "facebook" | "telegram" | "widget";
+
+// ============================= Filter  =============================
+
+export interface StatusOverViewResponse {
+  general: number;
+  mentioned: number;
+  openChats: number;
+  unassigned: number;
+}
+
+type conversationFilterType =
+  | "general"
+  | "mentioned"
+  | "openChats"
+  | "unassigned";
+
+type converstationStatusType = "opened" | "closed" | "snoozed" | "blocked";
+
+
+export type genericFiltersValues = Record<
+  string,
+  {
+    name: string;
+    value: string;
+    icon: ({ isActive }: { isActive: boolean }) => React.ReactNode;
+  }
+>
