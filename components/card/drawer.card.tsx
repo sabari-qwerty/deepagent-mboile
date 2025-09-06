@@ -18,7 +18,10 @@ export const DrawerCard: FC<prop> = ({ item, onPress }) => {
         <View className={`w-10 h-10 rounded-md overflow-hidden `}>
           <FallBackImage imageUrl={item.imageUrl} />
         </View>
-        <Text className="text-text-primary text-lg  font-bold ">
+        <View>
+
+        </View>
+       <Text className="text-text-primary text-lg  font-bold ">
           {item.name}
         </Text>
       </View>
