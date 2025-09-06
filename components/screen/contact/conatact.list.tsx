@@ -10,6 +10,7 @@ import {
   converstationStatusType,
 } from "@/types/type";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { FC, useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -101,7 +102,12 @@ export const ContactList: FC = () => {
         <FlatList
           data={data?.pages.flat()}
           renderItem={({ item }) => (
-            <ConatactCard item={item} onPress={() => ""} />
+            <ConatactCard
+              item={item}
+              onPress={() => {
+                router.push(`/(app)/(session)/ChatScreen`);
+              }}
+            />
           )}
           refreshControl={
             <RefreshControl

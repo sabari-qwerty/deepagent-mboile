@@ -7,9 +7,10 @@ import { useStorage } from "@/hooks/useStorage";
 import { StorageKeys } from "@/lib/utils/storage";
 import { services } from "@/services";
 import { useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { FC, useState } from "react";
 import {
-    FlatList,
+  FlatList,
   KeyboardAvoidingView,
   Text,
   TextInput,
@@ -37,7 +38,7 @@ const SearchScreen: FC = () => {
   });
 
   return (
-    <CustomSafeAreaView className="bg-white">
+    <CustomSafeAreaView className="bg-white" background="blue">
       <KeyboardAvoidingView
         behavior={"padding"}
         className="flex-1 w-fll h-full"
@@ -105,7 +106,12 @@ const SearchScreen: FC = () => {
                 className="w-full h-full flex-1"
                 data={data}
                 renderItem={({ item }) => (
-                  <ConatactCard item={item} onPress={() => {}} />
+                  <ConatactCard
+                    item={item}
+                    onPress={() => {
+                      router.push(`/(app)/(session)/ChatScreen`);
+                    }}
+                  />
                 )}
               />
             </View>
