@@ -3,13 +3,12 @@ import { FC } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  Linking,
-  Pressable,
   RefreshControl,
   Text,
   View,
 } from "react-native";
 import { WorkSpaceCard } from "../card/work.space.card";
+import { WorksSpaceFallback } from "../fallback/workspace.flat.list.fallback";
 
 interface props {
   refetch: () => void;
@@ -77,13 +76,6 @@ export const WorkspaceFlatList: FC<props> = ({
       </View>
     </View>
   ) : (
-    <View className="flex-1 justify-center items-center gap-y-2">
-      <Text className="text-text-primary  font-bold">No Workspace founed</Text>
-      <Pressable
-        onPress={() => Linking.openURL("https://app.deepagent.gozen.io/")}
-      >
-        <Text className="text-primary font-bold">Create Workspace</Text>
-      </Pressable>
-    </View>
+    <WorksSpaceFallback refetch={refetch} />
   );
 };
