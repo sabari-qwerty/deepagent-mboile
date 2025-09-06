@@ -42,3 +42,13 @@ export interface localWorkspace {
   imageUrl: string;
   shared: boolean;
 }
+
+// ============================= FILTER =============================
+
+type converstationStatusType = "opened" | "closed" | "snoozed" | "blocked";
+
+type conversationFilterType =
+  | "general"
+  | "mentioned"
+  | "openChats"
+  | "unassigned";
