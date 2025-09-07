@@ -211,3 +211,76 @@ export interface CustomContactData {
   type: string;
   userId: string;
 }
+
+
+//  ============================= Chat =============================
+
+interface attachments {
+  url: string;
+  title: string;
+  fileExtension: string;
+  fileType: "image" | "video" | "document";
+}
+interface MessagesResponse {
+  id: string;
+  sessionId: string;
+  sender: "user" | "bot" | "agent" | "system";
+  user_summary?: UserSummary;
+  agent_summary?: agentSummary;
+  blocks: [
+    {
+      type: string;
+      text: string;
+    },
+    sources: {
+      url: string;
+      title: string;
+    }[]
+  ];
+  attachments: attachments[];
+  timeStamp: string;
+  seen: boolean;
+  isNowAdded?: boolean;
+  isUploading?: boolean;
+}
+
+export interface ChatSession {
+  _id?: string;
+  knowledgeBaseId: string;
+  teamId?: string;
+  imageUrl?: string;
+  tenantId: string;
+  kbName: string;
+  assigned?: assigned;
+  assignedPerson?: string;
+  defaultAnswer?: string;
+  prompt?: string;
+  isDemo?: boolean;
+  priority?: boolean;
+  model?: string;
+  tags?: string[];
+  status?: status;
+  customKeys?: string;
+  isUnread?: boolean;
+  messages: MessagesResponse[];
+  userData?: any;
+  url?: [];
+  mention?: chatMention[];
+  platform?: platform;
+  note: sessionNote[];
+  participant?: string[];
+  last_seen_by_user_at?: Date;
+  feedback?: ChatAnswerFeedbackType;
+  embeddingModel?: EmbeddingModel;
+  startedAt: Date;
+  updatedAt: Date;
+}
+
+type assigned = "Bot" | "Agent";
+
+interface sessionNote {
+  id: string;
+  note: string;
+  imageUrl: string;
+  timeStamp: string;
+}

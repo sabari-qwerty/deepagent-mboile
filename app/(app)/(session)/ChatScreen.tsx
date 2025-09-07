@@ -1,28 +1,19 @@
+import { ChatList } from "@/components/chat/chat.list";
 import { CustomSafeAreaView } from "@/components/container/custom.safe.areya";
 import { ChatHeader } from "@/components/header/chat.header";
-import { useStorage } from "@/hooks/useStorage";
-import { StorageKeys } from "@/lib/utils/storage";
 import { FC } from "react";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 const ChatScreen: FC = () => {
-  const [currentContact, setCurrentContact] = useStorage(
-    StorageKeys.contactData
-  );
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
-
-  console.log({
-    currentContact,
-  });
-
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
-
   return (
     <CustomSafeAreaView background="blue" className="flex-1 bg-white ">
-      <ChatHeader />
+      <KeyboardAvoidingView
+        behavior={"padding"}
+        className="flex-1 w-full h-full"
+      >
+        <ChatHeader />
+        <ChatList />
+      </KeyboardAvoidingView>
     </CustomSafeAreaView>
   );
 };

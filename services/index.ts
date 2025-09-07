@@ -3,6 +3,7 @@
 // import { DeleteMessage } from "./contact/chat/delet";
 // import getChat from "./contact/chat/get";
 // import { NewChat } from "./contact/chat/newChat";
+import getChat from "./contact/chat/get";
 import contactGet from "./contact/get";
 import { SearchContact } from "./contact/search/get";
 import statusGet from "./contact/status/get";
@@ -24,11 +25,11 @@ export const services = {
   },
   contact: {
     get: contactGet,
-    // chat: {
-    //   get: getChat,
-    //   send: NewChat,
-    //   delete: DeleteMessage,
-    // },
+    chat: {
+      get: getChat,
+      // send: NewChat,
+      // delete: DeleteMessage,
+    },
     // assignee: {
     //   get: getAssignee,
     //   update: updateAssignee,

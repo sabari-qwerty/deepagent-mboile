@@ -51,7 +51,7 @@ export const ChatHeader: FC = () => {
               disabled={false}
             >
               <View className="w-full h-full  justify-center">
-                <Text className="text-lg text-text-primary  ">
+                <Text className="text-lg text-text-primary capitalize ">
                   {userData?.name}
                 </Text>
 
