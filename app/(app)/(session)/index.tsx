@@ -75,7 +75,7 @@ const ChatScreen: FC = () => {
 
   return (
     <GestureHandlerRootView className="flex-1 ">
-      <CustomSafeAreaView className="bg-white gap-y-6 pb-2">
+      <CustomSafeAreaView className="bg-white gap-y-6 pb-2" background="blue">
         <ContactHeader />
         <View className="gap-y-0">
           <SearchBar
