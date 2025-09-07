@@ -191,8 +191,14 @@ export const ContactList: FC = () => {
             >
               <ConatactCard
                 item={item}
-                onPress={() => {
+                onPress={async () => {
                   router.push(`/(app)/(session)/ChatScreen`);
+
+                  setCurrentContact({
+                    ...item.userData,
+                    platform: item.platform,
+                    status: item.status,
+                  });
                 }}
               />
             </Swipeable>
