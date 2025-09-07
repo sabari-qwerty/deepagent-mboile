@@ -5,6 +5,7 @@ import { DateAndtime } from "@/lib/utils/time";
 import { MessagesResponse } from "@/types/type";
 import { FC } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import { MessageRoute } from "../message/message.route";
 
 interface prop {
   item: MessagesResponse;
@@ -30,7 +31,7 @@ export const BabuleRoute: FC<prop> = ({ item }) => {
         >
           <View
             className={cn(
-              `max-w-[260px] min-w-[60px] px-3 py-2 ${
+              `max-w-[260px] min-w-[60px] px-3 py-2   ${
                 item.blocks[0].text !== "" && "pb-4"
               }  ${
                 item.attachments &&
@@ -41,13 +42,14 @@ export const BabuleRoute: FC<prop> = ({ item }) => {
               } rounded-md relative ${
                 item.sender === "user"
                   ? "bg-white self-start rounded-bl-none"
-                  : "bg-primary self-end rounded-br-none"
+                  : "bg-primary self-end rounded-br-none "
               } ${
                 item.sender === "system" && "bg-transparent w-full max-w-full "
-              }`
+              }  `
             )}
             style={item.sender === "user" && shadowStyles.shadowBox}
           >
+            <MessageRoute item={item} />
             {item.sender !== "system" && (
               <View className="absolute bottom-[4px] right-2 flex-row items-center gap-1">
                 <Text
