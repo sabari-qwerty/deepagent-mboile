@@ -3,6 +3,7 @@ import { ChatHeader } from "@/components/header/chat.header";
 import { MakeAsAssignee } from "@/components/screen/profile/asassine";
 import { CustomerTag } from "@/components/screen/profile/CustomerTag";
 import { UserInfo } from "@/components/screen/profile/profileInfo";
+import ViewedPage from "@/components/screen/profile/ViewPage";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -15,6 +16,7 @@ export default function Profile() {
           <UserInfo />
           <CustomerTag />
           <MakeAsAssignee />
+          <ViewedPage />
         </ScrollView>
       </View>
     </CustomSafeAreaView>

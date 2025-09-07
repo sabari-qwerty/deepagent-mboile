@@ -310,11 +310,22 @@ export interface Tenants {
   avatar_url: string;
 }
 
-
 interface ChangeAssigneePayload {
   sessionId: string;
   knowledgeBaseId: string;
   email: string;
   teamId: string;
   userId: string;
+}
+
+// ============================= Viewed Page =============================
+
+export interface ViewedPage {
+  _id: string;
+  pages: Page[];
+}
+
+export interface Page {
+  url: string;
+  title: string;
 }

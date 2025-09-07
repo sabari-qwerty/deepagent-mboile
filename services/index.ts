@@ -7,12 +7,12 @@ import getChat from "./contact/chat/get";
 import contactGet from "./contact/get";
 import { SearchContact } from "./contact/search/get";
 import statusGet from "./contact/status/get";
-// import { getRecentPage } from "./contact/recentpage/get";
+import { getRecentPage } from "./contact/recentpage/get";
 // import { SearchContact } from "./contact/search/get";
 // import { updateStatus } from "./contact/status/update/update";
+import { updateStatus } from "./contact/status/update/update";
 import { DeleteTag } from "./contact/tag/delete";
 import { PutTag } from "./contact/tag/put";
-import { updateStatus } from "./contact/status/update/update";
 import workspaceGet from "./workspace/get";
 
 export const services = {
@@ -38,9 +38,9 @@ export const services = {
       add: PutTag,
       delete: DeleteTag,
     },
-    // viewedPage: {
-    //   get: getRecentPage,
-    // },
+    viewedPage: {
+      get: getRecentPage,
+    },
     search: {
       get: SearchContact,
     },

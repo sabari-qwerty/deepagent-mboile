@@ -1,3 +1,4 @@
+import { Devider } from "@/components/common/devider";
 import { CustomSwitch } from "@/components/util/switch";
 import { Icons } from "@/constants/icons";
 import { useStorage } from "@/hooks/useStorage";
@@ -114,6 +115,7 @@ export const MakeAsAssignee: FC = () => {
             );
           })}
       </View>
+      <Devider />
     </View>
   );
 };
