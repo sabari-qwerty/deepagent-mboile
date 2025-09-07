@@ -1,9 +1,17 @@
+import {
+  CustomOnLongPress,
+  CustomOnPress,
+} from "@/actions/handle/handle.message.select";
 import { shadowStyles } from "@/components/header/contact.header";
+import {
+  ChatScreenContext,
+  ChatScreenContextProp,
+} from "@/components/provider/chat.screen.provider";
 import { Icons } from "@/constants/icons";
 import { cn } from "@/lib/utils/cn";
 import { DateAndtime } from "@/lib/utils/time";
 import { MessagesResponse } from "@/types/type";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { MessageRoute } from "../message/message.route";
 
@@ -12,6 +20,10 @@ interface prop {
 }
 
 export const BabuleRoute: FC<prop> = ({ item }) => {
+  const { messages, setMessages } = useContext(
+    ChatScreenContext
+  ) as ChatScreenContextProp;
+
   return (
     <View className={` w-full mx-auto  relative `}>
       <View
@@ -26,8 +38,20 @@ export const BabuleRoute: FC<prop> = ({ item }) => {
             item.sender === "bot" ||
             item.sender === "user"
           }
-          onPress={() => console.log("pressed")}
-          onLongPress={() => console.log("long pressed")}
+          onPress={() =>
+            CustomOnPress({
+              item,
+              message: messages,
+              setMessage: setMessages,
+            })
+          }
+          onLongPress={() =>
+            CustomOnLongPress({
+              item,
+              message: messages,
+              setMessage: setMessages,
+            })
+          }
         >
           <View
             className={cn(
@@ -75,9 +99,15 @@ export const BabuleRoute: FC<prop> = ({ item }) => {
           </View>
         </Pressable>
       </View>
-      {false && (
+      {Object.keys(messages).includes(item.id) && (
         <Pressable
-          onPress={() => console.log("pressed")}
+          onPress={() =>
+            CustomOnPress({
+              item,
+              message: messages,
+              setMessage: setMessages,
+            })
+          }
           className="w-full absolute top-0  h-full bg-primary/20"
         ></Pressable>
       )}
