@@ -341,3 +341,12 @@ export interface SendMessagePayload {
   knowledgeBaseId: string;
   file?: any;
 }
+
+
+// ============================= On Typing Start =============================
+
+interface onTypingStartPayload {
+  imageUrl: string;
+  userType: string;
+  sessionid: string;
+}

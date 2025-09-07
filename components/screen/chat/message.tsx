@@ -128,6 +128,7 @@ const SendMessage: FC = () => {
 
         <TouchableOpacity
           className="w-12 h-12"
+          disabled={message.trim() === ""}
           onPress={() =>
             handleSendTextMessage({
               message,
