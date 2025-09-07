@@ -9,20 +9,14 @@ import { ConatactAvatar } from "../avater/conact.avater";
 import { ChatScreenPopover } from "../popover";
 import { shadowStyles } from "./contact.header";
 
-export const ChatHeader: FC = () => {
+interface prop {
+  isNavigate: boolean;
+}
+
+export const ChatHeader: FC<prop> = ({ isNavigate }) => {
   const [userData] = useStorage<CustomContactData | null>(
     StorageKeys.contactData
   );
-
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
-
-  console.log({ userData });
-
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
 
   return (
     <View className="w-full  bg-white">
@@ -46,7 +40,11 @@ export const ChatHeader: FC = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={() => {
+                if (isNavigate) {
+                  router.push("/(app)/(session)/profile");
+                }
+              }}
               className="flex-1 h-12  "
               disabled={false}
             >

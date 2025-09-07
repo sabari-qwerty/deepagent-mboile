@@ -13,7 +13,7 @@ const ChatScreen: FC = () => {
           behavior={"padding"}
           className="flex-1 w-full h-full"
         >
-          <ChatHeader />
+          <ChatHeader isNavigate={true} />
           <ChatList />
         </KeyboardAvoidingView>
       </CustomSafeAreaView>
