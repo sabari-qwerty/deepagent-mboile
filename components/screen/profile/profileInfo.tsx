@@ -6,6 +6,7 @@ import { StorageKeys } from "@/lib/utils/storage";
 import { CustomContactData } from "@/types/type";
 import { FC } from "react";
 import { View } from "react-native";
+import { ProfileTitle } from "./Title";
 
 const color = "#586474";
 
@@ -73,7 +74,12 @@ export const UserInfo: FC = () => {
   );
   return (
     <View className="gap-y-2">
-      <View className="gap-y-2 w-[90%] mx-auto py-2">
+      <View className="gap-y-2 w-[95%] mx-auto py-2">
+        <ProfileTitle
+          name={"User Info"}
+          icon={<Icons.UserIcon color={"#586474"} />}
+        />
+
         {USER_DATA_FIELDS.map(
           (item, index) =>
             userData && (
@@ -85,6 +91,20 @@ export const UserInfo: FC = () => {
               />
             )
         )}
+      </View>
+
+      <Devider />
+
+      <View className="gap-y-2 w-[95%] mx-auto py-2">
+        <ProfileTitle
+          name="Contact Details"
+          icon={<Icons.Contact color={"#586474"} />}
+        />
+        <UserInfoCard
+          icon={<Icons.Mail color="#586474" size={15} />}
+          label="Email"
+          value={userData?.email ?? "not found"}
+        />
       </View>
 
       <Devider />
