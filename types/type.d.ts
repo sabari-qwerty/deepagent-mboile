@@ -188,3 +188,26 @@ interface commandPayload {
 interface StatusUpdatePayload extends commandPayload {
   status: string;
 }
+
+// ============================= Custom Contact Data =============================
+
+export interface CustomContactData {
+  asOrganization: string;
+  city: string;
+  continent: string;
+  country: string;
+  email: string;
+  id: string;
+  imageId: string;
+  ip: string;
+  isEmailModified: boolean;
+  latitude: string;
+  longitude: string;
+  name: string;
+  platform: platform;
+  region: string;
+  status: string;
+  timezone: string;
+  type: string;
+  userId: string;
+}
