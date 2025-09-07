@@ -1,5 +1,6 @@
 import { Icons } from "@/constants/icons";
 import { useStorage } from "@/hooks/useStorage";
+import { openFile } from "@/lib/utils/open.file";
 import { StorageKeys } from "@/lib/utils/storage";
 import { PreviewTime } from "@/lib/utils/time";
 import { CustomContactData } from "@/types/type";
@@ -38,12 +39,12 @@ export const Preivewheader = () => {
         <Pressable
           className=" py-3 px-3 rounded-full "
           onPress={() => {
-            // openFile({
-            //   fileUri: url as string,
-            //   extions:
-            //     (fileExtension as any) ??
-            //     String(title).split(".").splice(-1)[0].trim(),
-            // });
+            openFile({
+              fileUri: url as string,
+              extions:
+                (fileExtension as any) ??
+                String(title).split(".").splice(-1)[0].trim(),
+            });
           }}
         >
           <Icons.DownloadIcon color="#fff" size={20} />
