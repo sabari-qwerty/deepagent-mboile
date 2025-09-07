@@ -1,4 +1,5 @@
 import { CuttomButtonForCahtBabule } from "@/components/button/CusttomButtonForChatBabule";
+import { ResizeImage } from "@/components/image/resize.image";
 import {
   ChatScreenContext,
   ChatScreenContextProp,
@@ -25,7 +26,7 @@ export const MessageRoute: FC<{ item: MessagesResponse }> = ({ item }) => {
           setMessage={setMessages}
           url={"/preview"}
         >
-          <Text className="text-text-primary">Image</Text>
+          <ResizeImage imageUrl={item.attachments[0].url} />
         </CuttomButtonForCahtBabule>
       );
 
