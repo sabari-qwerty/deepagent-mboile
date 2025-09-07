@@ -14,7 +14,7 @@ export const RootRouter: FC = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-  }, []);
+  }, []); 
 
   console.log({
     workspaceId,

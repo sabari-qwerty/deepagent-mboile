@@ -52,7 +52,7 @@ export const CustomOnPress = ({
   if (url !== "" && url && Object.keys(message).length === 0) {
     console.log("hello world");
     router.push({
-      pathname: url as any,
+      pathname: "/(app)/(session)/preview",
       params: {
         url: item.attachments[0].url,
         title: item.attachments[0].title,

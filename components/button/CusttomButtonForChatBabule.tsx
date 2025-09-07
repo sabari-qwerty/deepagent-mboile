@@ -1,3 +1,4 @@
+import { CustomOnLongPress, CustomOnPress } from "@/actions/handle/handle.message.select";
 import { MessagesResponse } from "@/types/type";
 import { FC, ReactNode } from "react";
 import { TouchableOpacity } from "react-native";
@@ -20,8 +21,21 @@ export const CuttomButtonForCahtBabule: FC<CuttomButtonForCahtBabuleProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      onPress={() => {}}
-      onLongPress={() => {}}
+      onPress={() =>
+        CustomOnPress({
+          item,
+          message,
+          setMessage,
+          url,
+        })
+      }
+      onLongPress={() =>
+        CustomOnLongPress({
+          item,
+          message,
+          setMessage,
+        })
+      }
       className="w-[240px]"
     >
       {children}
