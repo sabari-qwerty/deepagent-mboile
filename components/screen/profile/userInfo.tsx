@@ -1,4 +1,5 @@
 import { UserInfoCard } from "@/components/card/userInfoCard";
+import { Devider } from "@/components/common/devider";
 import { Icons } from "@/constants/icons";
 import { useStorage } from "@/hooks/useStorage";
 import { StorageKeys } from "@/lib/utils/storage";
@@ -72,17 +73,21 @@ export const UserInfo: FC = () => {
   );
   return (
     <View className="gap-y-2">
-      {USER_DATA_FIELDS.map(
-        (item, index) =>
-          userData && (
-            <UserInfoCard
-              key={index}
-              icon={item.icon()}
-              label={item.label}
-              value={userData[item.key as keyof CustomContactData] as string}
-            />
-          )
-      )}
+      <View className="gap-y-2 w-[90%] mx-auto py-2">
+        {USER_DATA_FIELDS.map(
+          (item, index) =>
+            userData && (
+              <UserInfoCard
+                key={index}
+                icon={item.icon()}
+                label={item.label}
+                value={userData[item.key as keyof CustomContactData] as string}
+              />
+            )
+        )}
+      </View>
+
+      <Devider />
     </View>
   );
 };
