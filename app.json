@@ -36,7 +36,6 @@
     },
     "plugins": [
       "expo-router",
-
       [
         "expo-splash-screen",
         {
@@ -47,13 +46,13 @@
           "backgroundColor": "#ffffff"
         }
       ],
-
       [
         "react-native-auth0",
         {
           "domain": "optinly.auth0.com"
         }
-      ]
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true

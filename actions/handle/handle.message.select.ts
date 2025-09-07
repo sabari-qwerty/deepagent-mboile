@@ -59,6 +59,7 @@ export const CustomOnPress = ({
         timeStamp: item.timeStamp,
         fileType: item.attachments[0].fileType,
         fileExtension: item.attachments[0].fileExtension,
+        sender: item.sender,
       },
     });
     return;
