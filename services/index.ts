@@ -1,6 +1,6 @@
 import { getAssignee } from "./contact/chat/assignee/get";
 import { updateAssignee } from "./contact/chat/assignee/update";
-// import { DeleteMessage } from "./contact/chat/delet";
+import { DeleteMessage } from "./contact/chat/delet";
 // import getChat from "./contact/chat/get";
 // import { NewChat } from "./contact/chat/newChat";
 import getChat from "./contact/chat/get";
@@ -28,7 +28,7 @@ export const services = {
     chat: {
       get: getChat,
       // send: NewChat,
-      // delete: DeleteMessage,
+      delete: DeleteMessage,
     },
     assignee: {
       get: getAssignee,

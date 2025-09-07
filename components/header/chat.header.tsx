@@ -1,12 +1,17 @@
+import { handleDelete } from "@/actions/handle/delete";
 import { Icons } from "@/constants/icons";
 import { useStorage } from "@/hooks/useStorage";
 import { StorageKeys } from "@/lib/utils/storage";
 import { CustomContactData } from "@/types/type";
 import { router, useLocalSearchParams } from "expo-router";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { ConatactAvatar } from "../avater/conact.avater";
 import { ChatScreenPopover } from "../popover";
+import {
+  ChatScreenContext,
+  ChatScreenContextProp,
+} from "../provider/chat.screen.provider";
 import { shadowStyles } from "./contact.header";
 
 interface prop {
@@ -20,13 +25,27 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
 
   const { sessionId } = useLocalSearchParams();
 
+  const { messages, setMessages } = useContext(
+    ChatScreenContext
+  ) as ChatScreenContextProp;
+
+  console.log("\n");
+  console.log("\n");
+  console.log("\n");
+
+  console.log({ messages });
+
+  console.log("\n");
+  console.log("\n");
+  console.log("\n");
+
   return (
     <View className="w-full  bg-white">
       {userData === null && (
         <View className="w-12 h-12 bg-white rounded-full"></View>
       )}
 
-      {userData !== null && (
+      {userData !== null && Object.keys(messages).length === 0 && (
         <View className="w-full" style={shadowStyles.shadowBox}>
           <View className="w-[95%] mx-auto flex-row gap-x-2 py-3 ">
             <TouchableOpacity
@@ -70,6 +89,29 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
             <View className="w-8  justify-center items-center ">
               <ChatScreenPopover />
             </View>
+          </View>
+        </View>
+      )}
+
+      {userData !== null && Object.keys(messages).length > 0 && (
+        <View className="w-full py-2.5 " style={shadowStyles.shadowBox}>
+          <View className="w-[95%] mx-auto flex-row justify-between items-center py-3">
+            <Text className="text-text-primary font-medium  text-md">
+              Selected Chat: {Object.keys(messages).length}
+            </Text>
+
+            <TouchableOpacity
+              onPress={() =>
+                handleDelete({
+                  messages,
+                  sessionId: sessionId as string,
+                  setMessages,
+                })
+              }
+              className="flex-row gap-x-1 items-center px-2"
+            >
+              <Icons.Deleate color="#000" size={24} />
+            </TouchableOpacity>
           </View>
         </View>
       )}
