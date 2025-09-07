@@ -83,8 +83,8 @@ const ChatScreen: FC = () => {
           />
           <Mentioned
             onPress={() => ShowBottomSheet({ bottomSheet: "status" })}
-            status="opened"
-            filter="general"
+            status={status}
+            filter={generalFilter}
           />
         </View>
         <ContactList />

@@ -98,7 +98,6 @@ export const ChatStatusChange = [
   },
 ];
 
-
 export const searchFilter = [
   {
     lable: "Widget",
@@ -117,3 +116,4 @@ export const searchFilter = [
     value: "facebook",
   },
 ];
+

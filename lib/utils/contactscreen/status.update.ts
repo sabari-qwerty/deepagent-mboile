@@ -1,12 +1,16 @@
 import { queryClient } from "@/tanstack-query";
-import { ContactData, StatusUpdatePayload } from "@/types/type";
+import {
+  ContactData,
+  CustomContactData,
+  StatusUpdatePayload,
+} from "@/types/type";
 
 interface UpdateStatusProps {
   status: string;
   sessionId: string;
   keys: string[];
   ContactData: ContactData;
-  setContactData: (data: unknown) => void;
+  setContactData: (data: CustomContactData) => void;
   updateRequest: ({
     knowledgeBaseId,
     status,
@@ -33,13 +37,17 @@ export const UpdateStatus = async ({
 
   if (!currentContactData) return;
 
+  console.log({ ContactData });
+
+  ContactData.status = status;
+
+  setContactData(ContactData as unknown as CustomContactData);
+
   // Update the contact's status
-  setContactData(
-    JSON.stringify({
-      ...ContactData,
-      status,
-    })
-  );
+  // setContactData({
+  //   ...(ContactData as unknown as CustomContactData),
+  //   status,
+  // });
 
   // Remove from current status list
   const updatedCurrentPages = currentContactData.pages.map((page) =>

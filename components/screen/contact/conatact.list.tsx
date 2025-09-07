@@ -129,7 +129,7 @@ export const ContactList: FC = () => {
           status: "closed",
           sessionId,
           keys: currentkey as unknown as string[],
-          ContactData: JSON.parse(currentContact as string),
+          ContactData: currentContact as unknown as ContactData,
           setContactData: setCurrentContact,
           updateRequest: statusUpdate,
           knowledgeBaseId: String(activeWorkspaceId),
@@ -150,7 +150,7 @@ export const ContactList: FC = () => {
           status: "opened",
           sessionId,
           keys: currentkey as unknown as string[],
-          ContactData: JSON.parse(currentContact as string),
+          ContactData: currentContact as unknown as ContactData,
           setContactData: setCurrentContact,
           updateRequest: statusUpdate,
           knowledgeBaseId: String(activeWorkspaceId),
@@ -192,7 +192,12 @@ export const ContactList: FC = () => {
               <ConatactCard
                 item={item}
                 onPress={async () => {
-                  router.push(`/(app)/(session)/ChatScreen`);
+                  router.push({
+                    pathname: `/(app)/(session)/ChatScreen`,
+                    params: {
+                      sessionId: item._id,
+                    },
+                  });
 
                   setCurrentContact({
                     ...item.userData,

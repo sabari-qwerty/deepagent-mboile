@@ -6,6 +6,7 @@ import { router } from "expo-router";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { ConatactAvatar } from "../avater/conact.avater";
+import { ChatScreenPopover } from "../popover";
 import { shadowStyles } from "./contact.header";
 
 export const ChatHeader: FC = () => {
@@ -61,7 +62,9 @@ export const ChatHeader: FC = () => {
                 )}
               </View>
             </TouchableOpacity>
-            <View className="w-8  justify-center items-center "></View>
+            <View className="w-8  justify-center items-center ">
+              <ChatScreenPopover />
+            </View>
           </View>
         </View>
       )}
