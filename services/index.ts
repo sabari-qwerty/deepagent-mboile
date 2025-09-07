@@ -10,8 +10,8 @@ import statusGet from "./contact/status/get";
 // import { getRecentPage } from "./contact/recentpage/get";
 // import { SearchContact } from "./contact/search/get";
 // import { updateStatus } from "./contact/status/update/update";
-// import { DeleteTag } from "./contact/tag/delete";
-// import { PutTag } from "./contact/tag/put";
+import { DeleteTag } from "./contact/tag/delete";
+import { PutTag } from "./contact/tag/put";
 import { updateStatus } from "./contact/status/update/update";
 import workspaceGet from "./workspace/get";
 
@@ -34,10 +34,10 @@ export const services = {
     //   get: getAssignee,
     //   update: updateAssignee,
     // },
-    // tag: {
-    //   add: PutTag,
-    //   delete: DeleteTag,
-    // },
+    tag: {
+      add: PutTag,
+      delete: DeleteTag,
+    },
     // viewedPage: {
     //   get: getRecentPage,
     // },

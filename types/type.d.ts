@@ -284,3 +284,9 @@ interface sessionNote {
   imageUrl: string;
   timeStamp: string;
 }
+
+
+// ============================= Tag =============================
+interface TagPayload extends commandPayload {
+  tag: string;
+}

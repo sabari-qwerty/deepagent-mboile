@@ -105,6 +105,7 @@ export const UserInfo: FC = () => {
           label="Email"
           value={userData?.email ?? "not found"}
         />
+        
       </View>
 
       <Devider />
