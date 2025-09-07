@@ -95,20 +95,23 @@ export const UserInfo: FC = () => {
 
       <Devider />
 
-      <View className="gap-y-2 w-[95%] mx-auto py-2">
-        <ProfileTitle
-          name="Contact Details"
-          icon={<Icons.Contact color={"#586474"} />}
-        />
-        <UserInfoCard
-          icon={<Icons.Mail color="#586474" size={15} />}
-          label="Email"
-          value={userData?.email ?? "not found"}
-        />
-        
-      </View>
+      {userData?.email && (
+        <>
+          <View className="gap-y-2 w-[95%] mx-auto ">
+            <ProfileTitle
+              name="Contact Details"
+              icon={<Icons.Contact color={"#586474"} />}
+            />
+            <UserInfoCard
+              icon={<Icons.Mail color="#586474" size={15} />}
+              label="Email"
+              value={userData?.email ?? "not found"}
+            />
+          </View>
 
-      <Devider />
+          <Devider />
+        </>
+      )}
     </View>
   );
 };

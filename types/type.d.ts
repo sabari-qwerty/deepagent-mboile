@@ -212,7 +212,6 @@ export interface CustomContactData {
   userId: string;
 }
 
-
 //  ============================= Chat =============================
 
 interface attachments {
@@ -285,8 +284,37 @@ interface sessionNote {
   timeStamp: string;
 }
 
-
 // ============================= Tag =============================
 interface TagPayload extends commandPayload {
   tag: string;
+}
+
+// ============================= Assignee =============================
+
+export interface Team {
+  tenant_id: string;
+  joinedAt: string;
+  role: string;
+  status: string;
+  teamId: string;
+  teamMemberId: string;
+  botAccess: boolean;
+  permission: string;
+  showProfile: boolean;
+  tenants: Tenants;
+}
+
+export interface Tenants {
+  name: string;
+  email: string;
+  avatar_url: string;
+}
+
+
+interface ChangeAssigneePayload {
+  sessionId: string;
+  knowledgeBaseId: string;
+  email: string;
+  teamId: string;
+  userId: string;
 }

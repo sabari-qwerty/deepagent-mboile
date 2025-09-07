@@ -23,11 +23,14 @@ export const ChatList: FC = () => {
       services.contact.chat.get({ sessionId: sessionId as string }),
   });
 
+  console.log(["chat", sessionId]);
+
   useEffect(() => {
     if (!data) return;
-    setTag(data.tags);
-    setTeamId(data.teamId);
-    setAssignee(data.assignedPerson);
+
+    setTag(data.tags || []);
+    setTeamId(data.teamId || "");
+    setAssignee(data.assignedPerson || "");
   }, [data]);
 
   return (

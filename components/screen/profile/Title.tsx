@@ -16,8 +16,8 @@ export const ProfileTitle: FC<ProfileTitleProps> = ({
   onPress,
 }) => {
   return (
-    <View className="flex-row items-center justify-between">
-      <View className="flex-row items-center gap-x-2 py-2 flex-1">
+    <View className="flex-row items-center justify-between pt-2">
+      <View className="flex-row  items-center gap-x-2 py-2 flex-1">
         {icon}
         <Text className="text-lg font-medium text-text-secondary">{name}</Text>
       </View>

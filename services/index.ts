@@ -1,5 +1,5 @@
-// import { getAssignee } from "./contact/chat/assignee/get";
-// import { updateAssignee } from "./contact/chat/assignee/update";
+import { getAssignee } from "./contact/chat/assignee/get";
+import { updateAssignee } from "./contact/chat/assignee/update";
 // import { DeleteMessage } from "./contact/chat/delet";
 // import getChat from "./contact/chat/get";
 // import { NewChat } from "./contact/chat/newChat";
@@ -30,10 +30,10 @@ export const services = {
       // send: NewChat,
       // delete: DeleteMessage,
     },
-    // assignee: {
-    //   get: getAssignee,
-    //   update: updateAssignee,
-    // },
+    assignee: {
+      get: getAssignee,
+      update: updateAssignee,
+    },
     tag: {
       add: PutTag,
       delete: DeleteTag,

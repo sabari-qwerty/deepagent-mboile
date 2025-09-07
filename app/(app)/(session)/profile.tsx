@@ -1,5 +1,6 @@
 import { CustomSafeAreaView } from "@/components/container/custom.safe.areya";
 import { ChatHeader } from "@/components/header/chat.header";
+import { MakeAsAssignee } from "@/components/screen/profile/asassine";
 import { CustomerTag } from "@/components/screen/profile/CustomerTag";
 import { UserInfo } from "@/components/screen/profile/profileInfo";
 import { View } from "react-native";
@@ -13,7 +14,7 @@ export default function Profile() {
         <ScrollView>
           <UserInfo />
           <CustomerTag />
-          {/* <ProfileContact /> */}
+          <MakeAsAssignee />
         </ScrollView>
       </View>
     </CustomSafeAreaView>

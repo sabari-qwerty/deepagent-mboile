@@ -2,7 +2,7 @@ import { Icons } from "@/constants/icons";
 import { useStorage } from "@/hooks/useStorage";
 import { StorageKeys } from "@/lib/utils/storage";
 import { CustomContactData } from "@/types/type";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { ConatactAvatar } from "../avater/conact.avater";
@@ -17,6 +17,8 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
   const [userData] = useStorage<CustomContactData | null>(
     StorageKeys.contactData
   );
+
+  const { sessionId } = useLocalSearchParams();
 
   return (
     <View className="w-full  bg-white">
@@ -42,7 +44,12 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
             <TouchableOpacity
               onPress={() => {
                 if (isNavigate) {
-                  router.push("/(app)/(session)/profile");
+                  router.push({
+                    pathname: "/(app)/(session)/profile",
+                    params: {
+                      sessionId,
+                    },
+                  });
                 }
               }}
               className="flex-1 h-12  "
