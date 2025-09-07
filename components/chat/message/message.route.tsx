@@ -6,6 +6,7 @@ import {
 import { MessagesResponse } from "@/types/type";
 import { FC, useContext } from "react";
 import { Text } from "react-native";
+import { DocumentBabule } from "./pdf.babule";
 import { TextRoute } from "./text.route";
 
 export const MessageRoute: FC<{ item: MessagesResponse }> = ({ item }) => {
@@ -48,7 +49,7 @@ export const MessageRoute: FC<{ item: MessagesResponse }> = ({ item }) => {
           setMessage={setMessages}
           url={"/preview"}
         >
-          <Text className="text-text-primary">Document</Text>
+          <DocumentBabule item={item} />
         </CuttomButtonForCahtBabule>
       );
 
