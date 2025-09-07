@@ -1,12 +1,12 @@
 import { CuttomButtonForCahtBabule } from "@/components/button/CusttomButtonForChatBabule";
 import { ResizeImage } from "@/components/image/resize.image";
+import { ViedoThumbnail } from "@/components/image/viedo.thumbnail";
 import {
   ChatScreenContext,
   ChatScreenContextProp,
 } from "@/components/provider/chat.screen.provider";
 import { MessagesResponse } from "@/types/type";
 import { FC, useContext } from "react";
-import { Text } from "react-native";
 import { DocumentBabule } from "./pdf.babule";
 import { TextRoute } from "./text.route";
 
@@ -38,7 +38,7 @@ export const MessageRoute: FC<{ item: MessagesResponse }> = ({ item }) => {
           setMessage={setMessages}
           url={"/preview"}
         >
-          <Text className="text-text-primary">Video</Text>
+          <ViedoThumbnail url={item.attachments[0].url} />
         </CuttomButtonForCahtBabule>
       );
 
