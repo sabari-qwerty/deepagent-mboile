@@ -22,7 +22,7 @@ export const ConatactCard: FC<prop> = ({ item, onPress }) => {
       />
       <View className="flex-1 w-full h-full justify-between py-0.5 flex-row">
         <View>
-          <Text className="text-[#06152D] font-bold text-md text-left items-start">
+          <Text className="text-[#06152D] font-bold text-md text-left items-start capitalize">
             {item?.userData?.name ?? ""}
           </Text>
           <PreviewMessage latestMessage={item.latestMessage} />

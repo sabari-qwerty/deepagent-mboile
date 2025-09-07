@@ -11,6 +11,7 @@ import statusGet from "./contact/status/get";
 // import { updateStatus } from "./contact/status/update/update";
 // import { DeleteTag } from "./contact/tag/delete";
 // import { PutTag } from "./contact/tag/put";
+import { updateStatus } from "./contact/status/update/update";
 import workspaceGet from "./workspace/get";
 
 export const services = {
@@ -19,7 +20,7 @@ export const services = {
   },
   status: {
     get: statusGet,
-    // update: updateStatus,
+    update: updateStatus,
   },
   contact: {
     get: contactGet,

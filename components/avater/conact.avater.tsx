@@ -18,7 +18,7 @@ export const ConatactAvatar: FC<prop> = ({ imageId, platform }) => {
     >
       <Image
         source={ProfileImage[imageId as keyof typeof ProfileImage]}
-        className="w-full h-full rounded-full"
+        className="w-full h-full rounded-full "
       />
       <View className="absolute -right-1 bottom-0">
         <PlatFromBadge platform={platform} />

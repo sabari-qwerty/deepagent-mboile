@@ -112,7 +112,7 @@ interface LatestMessage {
   answerTokens?: number;
 }
 
-interface ContactData {
+interface ContactDataResposne {
   pageParams: number[];
   pages: ContactData[];
 }
@@ -151,8 +151,6 @@ export type genericFiltersValues = Record<
 
 export type bottomSheet = "status" | "gobalFilter" | "";
 
-
-
 // ============================= Status =============================
 
 export interface GetStatusResponse {
@@ -161,7 +159,6 @@ export interface GetStatusResponse {
   openChats: number;
   unassigned: number;
 }
-
 
 export interface GetStatusRequestResposne {
   general: number;
@@ -172,7 +169,6 @@ export interface GetStatusRequestResposne {
   unassigned: number;
 }
 
-
 // ============================= Search =============================
 
 export interface SearchPayload {
@@ -180,4 +176,15 @@ export interface SearchPayload {
   conversation: string[];
   tag: string[];
   q: string;
+}
+
+// ============================= Status Update  =============================
+
+interface commandPayload {
+  sessionId: string;
+  knowledgeBaseId: string;
+}
+
+interface StatusUpdatePayload extends commandPayload {
+  status: string;
 }
