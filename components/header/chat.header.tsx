@@ -29,15 +29,7 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
     ChatScreenContext
   ) as ChatScreenContextProp;
 
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
 
-  console.log({ messages });
-
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
 
   return (
     <View className="w-full  bg-white">

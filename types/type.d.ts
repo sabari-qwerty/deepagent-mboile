@@ -329,3 +329,15 @@ export interface Page {
   url: string;
   title: string;
 }
+
+
+// ============================= Send Message =============================
+
+export interface SendMessagePayload {
+  message: string;
+  setMessage: (e: string) => void;
+  sessionId: string;
+  accessToken: string;
+  knowledgeBaseId: string;
+  file?: any;
+}
