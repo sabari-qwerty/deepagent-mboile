@@ -24,6 +24,8 @@ export const ChatList: FC = () => {
   const [tag, setTag] = useStorage(StorageKeys.tags);
   const [teamId, setTeamId] = useStorage(StorageKeys.teamId);
   const [assignee, setAssignee] = useStorage(StorageKeys.assignee);
+  const [activeWorkspaceId] = useStorage(StorageKeys.activeWorkspaceId);
+
   const { socket } = useSocket();
 
   const [currentKey] = useStorage<string | null>(StorageKeys.activeFilter);
@@ -37,8 +39,6 @@ export const ChatList: FC = () => {
     queryFn: () =>
       services.contact.chat.get({ sessionId: sessionId as string }),
   });
-
-  console.log(["chat", sessionId]);
 
   useEffect(() => {
     if (!data) return;
@@ -165,6 +165,23 @@ export const ChatList: FC = () => {
       }
     };
   }, [socket, sessionId]);
+
+  useEffect(() => {
+    const lastMessageIsFromClient =
+      data?.messages[data?.messages.length - 1].sender !== "agent";
+
+    if (!sessionId || !lastMessageIsFromClient || !currentKey) {
+      return;
+    }
+
+    if (!socket) return;
+
+    socket.emit("markMessageAsSeen", {
+      knowledgeBaseId: String(activeWorkspaceId),
+      sessionId: String(sessionId),
+      sender: "user",
+    });
+  }, [data?.messages.length, sessionId, activeWorkspaceId]);
 
   return (
     <View className="flex-1  w-full h-full ">
