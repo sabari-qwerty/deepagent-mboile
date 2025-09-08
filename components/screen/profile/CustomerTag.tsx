@@ -23,14 +23,11 @@ export const CustomerTag: FC = () => {
   const [currentContact] = useStorage<CustomContactData | null>(
     StorageKeys.contactData
   );
+
   const { sessionId } = useLocalSearchParams();
   const [currentTag, setCurrentTag] = useState<string>("");
 
   const [addTaxt, setAddTaxt] = useState("");
-
-  console.log({
-    tags,
-  });
 
   const { mutate: addTag } = useMutation({
     mutationFn: (payload: TagPayload) =>
