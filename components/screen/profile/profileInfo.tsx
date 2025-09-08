@@ -91,27 +91,14 @@ export const UserInfo: FC = () => {
               />
             )
         )}
+        <UserInfoCard
+          icon={<Icons.Mail color="#586474" size={15} />}
+          label="Email"
+          value={userData?.email ?? "not found"}
+        />
       </View>
 
       <Devider />
-
-      {userData?.email && (
-        <>
-          <View className="gap-y-2 w-[95%] mx-auto ">
-            <ProfileTitle
-              name="Contact Details"
-              icon={<Icons.Contact color={"#586474"} />}
-            />
-            <UserInfoCard
-              icon={<Icons.Mail color="#586474" size={15} />}
-              label="Email"
-              value={userData?.email ?? "not found"}
-            />
-          </View>
-
-          <Devider />
-        </>
-      )}
     </View>
   );
 };
