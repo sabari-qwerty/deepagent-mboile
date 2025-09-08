@@ -1,4 +1,8 @@
 import { ConatactCard } from "@/components/card/contact.card";
+import {
+  ActionLocalContextProp,
+  useActionLocal,
+} from "@/components/provider/action.local";
 import { useSocket } from "@/components/provider/socket";
 import Swipeable from "@/components/util/swiper";
 import { Icons } from "@/constants/icons";
@@ -41,6 +45,7 @@ export const ContactList: FC = () => {
   const [contactId, setContactId] = useState("");
   const translateX = useSharedValue(0);
 
+  const { runOnce } = useActionLocal() as ActionLocalContextProp;
   const { socket } = useSocket();
 
   const { mutate: statusUpdate } = useMutation({
@@ -162,16 +167,6 @@ export const ContactList: FC = () => {
     },
   ];
 
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
-
-  console.log(JSON.stringify(data?.pages[0], null, 2));
-
-  console.log("\n");
-  console.log("\n");
-  console.log("\n");
-
   return (
     <View className="w-[95%] mx-auto  h-full flex-1 ">
       {(isLoading || (!isFetchingNextPage && isFetching)) && (
@@ -210,17 +205,19 @@ export const ContactList: FC = () => {
                 <ConatactCard
                   item={item}
                   onPress={async () => {
-                    router.push({
-                      pathname: `/(app)/(session)/ChatScreen`,
-                      params: {
-                        sessionId: item._id,
-                      },
-                    });
+                    runOnce(async () => {
+                      router.push({
+                        pathname: `/(app)/(session)/ChatScreen`,
+                        params: {
+                          sessionId: item._id,
+                        },
+                      });
 
-                    setCurrentContact({
-                      ...item.userData,
-                      platform: item.platform,
-                      status: item.status,
+                      setCurrentContact({
+                        ...item.userData,
+                        platform: item.platform,
+                        status: item.status,
+                      });
                     });
                   }}
                 />

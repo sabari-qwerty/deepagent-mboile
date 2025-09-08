@@ -5,6 +5,10 @@ import { localWorkspace } from "@/types/type";
 import { FC } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { FallBackImage } from "../image/falback.image";
+import {
+  ActionLocalContextProp,
+  useActionLocal,
+} from "../provider/action.local";
 
 export const ContactHeader: FC = () => {
   const [activeWorkspace] = useStorage<localWorkspace>(
@@ -12,12 +16,19 @@ export const ContactHeader: FC = () => {
   );
   const { open } = useDrawer();
 
+  const { locked, runOnce } = useActionLocal() as ActionLocalContextProp;
+
   return (
     <View className="w-full">
       <View className="w-[95%] mx-auto  pt-4    ">
         <Pressable
           className="flex flex-row gap-x-4 items-center"
-          onPress={open}
+          onPress={() => {
+            runOnce(async () => {
+              open();
+            });
+          }}
+          disabled={locked}
         >
           <View
             className="w-[40px] h-[40px] bg-white p-2 rounded-lg "

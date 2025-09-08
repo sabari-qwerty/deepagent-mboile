@@ -1,3 +1,7 @@
+import {
+  ActionLocalContextProp,
+  useActionLocal,
+} from "@/components/provider/action.local";
 import { Icons } from "@/constants/icons";
 import { router } from "expo-router";
 import { FC } from "react";
@@ -8,6 +12,7 @@ interface prop {
 }
 
 export const SearchBar: FC<prop> = ({ handleOpen }) => {
+  const { locked, runOnce } = useActionLocal() as ActionLocalContextProp;
   return (
     <View className="w-[95%] mx-auto flex flex-row justify-center items-center gap-x-2">
       <TouchableOpacity
@@ -16,8 +21,11 @@ export const SearchBar: FC<prop> = ({ handleOpen }) => {
           paddingLeft: 10,
         }}
         onPress={() => {
-          router.push("/search");
+          runOnce(async () => {
+            router.push("/search");
+          });
         }}
+        disabled={locked}
       >
         <Icons.SearchIcon />
         <View style={{ flex: 1 }} className="w-full  py-2 ">

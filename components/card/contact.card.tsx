@@ -3,6 +3,10 @@ import { ContactData } from "@/types/type";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { ConatactAvatar } from "../avater/conact.avater";
+import {
+  ActionLocalContextProp,
+  useActionLocal,
+} from "../provider/action.local";
 import { PreviewMessage } from "../screen/contact/previewMessage";
 
 interface prop {
@@ -11,9 +15,11 @@ interface prop {
 }
 
 export const ConatactCard: FC<prop> = ({ item, onPress }) => {
+  const { locked } = useActionLocal() as ActionLocalContextProp;
   return (
     <TouchableOpacity
       onPress={onPress}
+      disabled={locked}
       className="flex flex-row gap-x-4  my-2 h-12  items-center space-x-4"
     >
       <ConatactAvatar
