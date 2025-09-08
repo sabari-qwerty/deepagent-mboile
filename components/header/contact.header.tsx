@@ -25,9 +25,16 @@ export const ContactHeader: FC = () => {
           >
             <FallBackImage imageUrl={String(activeWorkspace?.imageUrl)} />
           </View>
-          <Text className="text-2xl text-[#07142F] font-bold ">
-            {activeWorkspace?.name}
-          </Text>
+          <View>
+            <Text className="text-text-primary text-xl font-bold ">
+              {activeWorkspace?.name}
+            </Text>
+            {activeWorkspace?.shared && (
+              <View className="w-[40px] h-[12px] rounded-xl  items-center justify-center bg-primary/80">
+                <Text className="text-[8px] text-white font-bold">shared</Text>
+              </View>
+            )}
+          </View>
         </Pressable>
       </View>
     </View>

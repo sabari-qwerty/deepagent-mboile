@@ -17,13 +17,13 @@ export const ConatactCard: FC<prop> = ({ item, onPress }) => {
       className="flex flex-row gap-x-4  my-2 h-12  items-center space-x-4"
     >
       <ConatactAvatar
-        imageId={item.userData.imageId}
+        imageId={item.userData.imageId ?? "PxYMze1T"}
         platform={item.platform}
       />
       <View className="flex-1 w-full h-full justify-between py-0.5 flex-row">
         <View>
           <Text className="text-[#06152D] font-bold text-md text-left items-start capitalize">
-            {item?.userData?.name ?? ""}
+            {item?.userData?.name ?? "Try-demo"}
           </Text>
           <PreviewMessage latestMessage={item.latestMessage} />
         </View>

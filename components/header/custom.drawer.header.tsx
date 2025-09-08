@@ -1,9 +1,14 @@
 import { Icons } from "@/constants/icons";
+import { router } from "expo-router";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Devider } from "../common/devider";
 
-export const CustomDrawerHeader: FC = () => {
+interface prop {
+  close: () => void;
+}
+
+export const CustomDrawerHeader: FC<prop> = ({ close }) => {
   return (
     <>
       <View className="py-4  justify-center items-center">
@@ -11,7 +16,12 @@ export const CustomDrawerHeader: FC = () => {
           <Text className="text-text-primary font-bold text-xl ">
             WorkSpace
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              router.replace("/(app)/(session)/workspace");
+              close();
+            }}
+          >
             <View>
               <Icons.pluseCircle color="#06152d" size={20} />
             </View>

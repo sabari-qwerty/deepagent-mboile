@@ -18,12 +18,18 @@ export const DrawerCard: FC<prop> = ({ item, onPress }) => {
         <View className={`w-10 h-10 rounded-md overflow-hidden `}>
           <FallBackImage imageUrl={item.imageUrl} />
         </View>
-        <View>
+        <View></View>
 
+        <View>
+          <Text className="text-text-primary text-xl font-bold ">
+            {item.name}
+          </Text>
+          {item.shared && (
+            <View className="w-[40px] h-[12px] rounded-xl  items-center justify-center bg-primary/80">
+              <Text className="text-[8px] text-white font-bold">shared</Text>
+            </View>
+          )}
         </View>
-       <Text className="text-text-primary text-lg  font-bold ">
-          {item.name}
-        </Text>
       </View>
     </TouchableOpacity>
   );

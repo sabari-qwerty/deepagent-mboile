@@ -165,6 +165,16 @@ export const ContactList: FC = () => {
     },
   ];
 
+  console.log("\n");
+  console.log("\n");
+  console.log("\n");
+
+  console.log(JSON.stringify(data?.pages[0], null, 2));
+
+  console.log("\n");
+  console.log("\n");
+  console.log("\n");
+
   return (
     <View className="w-[95%] mx-auto  h-full flex-1 ">
       {isLoading || (!isFetchingNextPage && isFetching) ? (

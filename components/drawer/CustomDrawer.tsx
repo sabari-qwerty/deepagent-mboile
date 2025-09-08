@@ -16,7 +16,7 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = ({
 
   return (
     <CustomSafeAreaView background="blue" className="flex-1  ">
-      <CustomDrawerHeader />
+      <CustomDrawerHeader close={close} />
       <View className="flex-1 ">
         <DrawerFlatList close={close} />
       </View>

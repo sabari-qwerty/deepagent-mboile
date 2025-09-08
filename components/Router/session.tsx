@@ -14,6 +14,7 @@ export const SessionRoute: FC = () => {
       <Stack.Screen name="index" />
       <Stack.Screen name="preview" />
       <Stack.Screen name="chat" />
+      <Stack.Screen name="workspace" />
     </Stack>
   );
 };

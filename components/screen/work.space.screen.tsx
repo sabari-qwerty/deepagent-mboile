@@ -34,7 +34,7 @@ export const WorkSpaceScreen: FC = () => {
   );
 
   const [tempWorkspace, setTempWorkspace] = useState<localWorkspace[]>(
-    allWorkspaces ? JSON.parse(String(allWorkspaces)) : []
+    allWorkspaces ?? []
   );
 
   const handleWorkspace = ({ workspace }: { workspace: localWorkspace }) => {
@@ -49,8 +49,10 @@ export const WorkSpaceScreen: FC = () => {
   };
 
   useEffect(() => {
-    const temp = allWorkspaces ? JSON.parse(String(allWorkspaces)) : [];
-    setIsNext(JSON.stringify(temp) !== JSON.stringify(tempWorkspace));
+    const temp = allWorkspaces ?? [];
+    const workspace = tempWorkspace ?? [];
+
+    setIsNext(String(temp) !== String(workspace));
   }, [tempWorkspace]);
 
   const handleSelectAll = () => {
@@ -69,9 +71,9 @@ export const WorkSpaceScreen: FC = () => {
     setActiveWorkspaceId(tempWorkspace[0].id);
     setActiveWorkspace(tempWorkspace[0]);
     setAllWorkspaces(tempWorkspace);
+    router.replace("/(app)/(session)");
     setTempWorkspace([]);
     setIsNext(false);
-    router.replace("/(app)/(session)");
   };
 
   return (
