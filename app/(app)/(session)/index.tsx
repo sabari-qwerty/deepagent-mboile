@@ -51,6 +51,8 @@ const ChatScreen: FC = () => {
     queryKey: ["status", activeWorkspaceId],
     queryFn: () =>
       services.status.get({ workspaceId: String(activeWorkspaceId) }),
+
+    enabled: !!activeWorkspaceId,
   });
 
   //  hanlde bottom sheet

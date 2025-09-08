@@ -79,10 +79,7 @@ export const ContactList: FC = () => {
           ((
             activeFilter as unknown as string[]
           )[2] as conversationFilterType) || "general",
-        knowledgeBaseId:
-          (activeFilter as unknown as string[])[1] ||
-          (activeWorkspaceId as string) ||
-          "",
+        knowledgeBaseId: (activeWorkspaceId as string) || "",
         option: "allMessage",
         page: pageParam as number,
         pageSize: 15,
@@ -95,7 +92,7 @@ export const ContactList: FC = () => {
       // If the last page has 15 items, there might be more
       return lastPage?.length === 15 ? allPages.length + 1 : undefined;
     },
-    enabled: String(activeFilter) !== "null" && activeFilter !== null,
+    enabled: activeWorkspaceId !== null && String(activeFilter) !== "null",
   });
 
   useEffect(() => {
