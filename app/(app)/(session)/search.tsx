@@ -23,6 +23,9 @@ const SearchScreen: FC = () => {
   const [filter, setFilter] = useState<string[]>([]);
   const [activeWorkspaceId] = useStorage(StorageKeys.activeWorkspaceId);
   const debouseSearch = useDebouse(search, 500);
+  const [currentContact, setCurrentContact] = useStorage(
+    StorageKeys.contactData
+  );
 
   const { data, isLoading } = useQuery({
     queryKey: ["search", debouseSearch, filter],
@@ -109,7 +112,17 @@ const SearchScreen: FC = () => {
                   <ConatactCard
                     item={item}
                     onPress={() => {
-                      router.push(`/(app)/(session)/ChatScreen`);
+                      router.push({
+                        pathname: `/(app)/(session)/ChatScreen`,
+                        params: {
+                          sessionId: item._id,
+                        },
+                      });
+                      setCurrentContact({
+                        ...item.userData,
+                        platform: item.platform,
+                        status: item.status,
+                      });
                     }}
                   />
                 )}
