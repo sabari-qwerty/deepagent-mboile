@@ -8,6 +8,7 @@ import truncateText from "@/lib/utils/truncateText";
 import { services } from "@/services";
 import { CustomContactData, TagPayload } from "@/types/type";
 import { useMutation } from "@tanstack/react-query";
+import { useLocalSearchParams } from "expo-router";
 import { FC, useState } from "react";
 import { Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { ProfileTitle } from "./Title";
@@ -22,6 +23,7 @@ export const CustomerTag: FC = () => {
   const [currentContact] = useStorage<CustomContactData | null>(
     StorageKeys.contactData
   );
+  const { sessionId } = useLocalSearchParams();
   const [currentTag, setCurrentTag] = useState<string>("");
 
   const [addTaxt, setAddTaxt] = useState("");
@@ -54,7 +56,7 @@ export const CustomerTag: FC = () => {
     setTags(tags?.filter((tag) => tag !== currentTag) || null);
     removeTag({
       tag: currentTag,
-      sessionId: (currentContact && currentContact?.id) || "",
+      sessionId: sessionId as string,
       knowledgeBaseId: String(activeWorkspaceId),
     });
     handleClose();
@@ -64,7 +66,7 @@ export const CustomerTag: FC = () => {
     setTags([...(tags || []), addTaxt]);
     addTag({
       tag: addTaxt,
-      sessionId: (currentContact && currentContact?.id) || "",
+      sessionId: sessionId as string,
       knowledgeBaseId: String(activeWorkspaceId),
     });
     setAddTaxt("");
