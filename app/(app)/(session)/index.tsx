@@ -16,13 +16,14 @@ import {
 } from "@/types/type";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useQuery } from "@tanstack/react-query";
+import { useFocusEffect } from "expo-router";
 import { FC, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const ChatScreen: FC = () => {
-  const { open } = useDrawer();
-  const { handleLogout } = useAuth();
+
+
 
   const [_, setActiveFilter] = useStorage(StorageKeys.activeFilter);
   const [activeWorkspaceId] = useStorage(StorageKeys.activeWorkspaceId);
@@ -74,6 +75,8 @@ const ChatScreen: FC = () => {
     setBottomSheet("");
     setSnapPoints([]);
   };
+
+
 
   return (
     <GestureHandlerRootView className="flex-1 ">

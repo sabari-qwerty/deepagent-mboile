@@ -72,8 +72,11 @@ export const WorkSpaceScreen: FC = () => {
     setActiveWorkspace(tempWorkspace[0]);
     setAllWorkspaces(tempWorkspace);
     router.replace("/(app)/(session)");
-    setTempWorkspace([]);
-    setIsNext(false);
+
+    setTimeout(() => {
+      setIsNext(false);
+      setTempWorkspace([]);
+    }, 1000);
   };
 
   return (

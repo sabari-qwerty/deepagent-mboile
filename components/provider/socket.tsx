@@ -13,11 +13,15 @@ import { io, Socket } from "socket.io-client";
 interface SocketContextType {
   socket: Socket | null;
   isConnected: boolean;
+  isChangeingWorkSpace: boolean;
+  setIsChangeingWorkSpace: (value: boolean) => void;
 }
 
 export const SocketContext = createContext<SocketContextType>({
   socket: null,
   isConnected: false,
+  isChangeingWorkSpace: false,
+  setIsChangeingWorkSpace: () => {},
 });
 
 interface SocketProviderProps {
@@ -28,6 +32,8 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
   const [accessToken] = useStorage<string>(StorageKeys.accessToken);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
+
+  const [isChangeingWorkSpace, setIsChangeingWorkSpace] = useState(false);
 
   useEffect(() => {
     if (!accessToken) return;
@@ -73,8 +79,21 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
     };
   }, [accessToken]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsChangeingWorkSpace(false);
+    }, 1000);
+  }, [isChangeingWorkSpace]);
+
   return (
-    <SocketContext.Provider value={{ socket, isConnected }}>
+    <SocketContext.Provider
+      value={{
+        socket,
+        isConnected,
+        isChangeingWorkSpace,
+        setIsChangeingWorkSpace,
+      }}
+    >
       {children}
     </SocketContext.Provider>
   );
@@ -88,4 +107,4 @@ export const useSocket = () => {
   }
   return context;
 };
-``
+``;

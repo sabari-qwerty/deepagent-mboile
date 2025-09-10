@@ -8,6 +8,7 @@ import { LogoutButton } from "../button/logout.button";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
 import { DrawerFlatList } from "../FlatList/darwer.flat.list";
 import { CustomDrawerHeader } from "../header/custom.drawer.header";
+import { useSocket } from "../provider/socket";
 
 export const CustomDrawer: FC<DrawerContentComponentProps> = ({
   navigation,
@@ -20,17 +21,8 @@ export const CustomDrawer: FC<DrawerContentComponentProps> = ({
   const [fcmToken, setFcmToken] = useStorage(StorageKeys.fcmToken);
 
 
+
   
-  console.log('\n');
-  console.log('\n');
-  console.log('\n');
-
-
-  console.log({ fcmToken });
-
-  console.log('\n');
-  console.log('\n');
-  console.log('\n');
 
   return (
     <CustomSafeAreaView background="blue" className="flex-1  ">

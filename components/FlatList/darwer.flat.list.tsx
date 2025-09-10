@@ -4,6 +4,7 @@ import { localWorkspace } from "@/types/type";
 import { FC } from "react";
 import { FlatList, View } from "react-native";
 import { DrawerCard } from "../card/drawer.card";
+import { useSocket } from "../provider/socket";
 
 interface prop {
   close: () => void;
@@ -18,7 +19,10 @@ export const DrawerFlatList: FC<prop> = ({ close }) => {
     StorageKeys.activeWorkspaceId
   );
 
+  const { setIsChangeingWorkSpace } = useSocket();
+
   const handleWorkspace = (workspace: localWorkspace) => {
+    setIsChangeingWorkSpace(true);
     setActiveWorkspace(workspace);
     setActiveWorkspaceId(workspace.id);
     close();

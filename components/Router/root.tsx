@@ -16,9 +16,6 @@ export const RootRouter: FC = () => {
     }, 1000);
   }, []); 
 
-  console.log({
-    workspaceId,
-  });
 
   return (
     <Provider>

@@ -33,7 +33,7 @@ import {
 import { useSharedValue, withSpring } from "react-native-reanimated";
 
 export const ContactList: FC = () => {
-  // local storage
+  const { isChangeingWorkSpace } = useSocket();
   const [currentkey] = useStorage<string[] | null>(StorageKeys.activeFilter);
   const [currentContact, setCurrentContact] = useStorage(
     StorageKeys.contactData
@@ -169,70 +169,66 @@ export const ContactList: FC = () => {
 
   return (
     <View className="w-[95%] mx-auto  h-full flex-1 ">
-      {(isLoading || (!isFetchingNextPage && isFetching)) && (
-        <View className="flex-1  justify-center items-center ">
+      {isLoading ||
+      (!isFetchingNextPage && isFetching) ||
+      isChangeingWorkSpace ? (
+        <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color="#0048e6" />
         </View>
-      )}
-
-      {!isLoading &&
+      ) : !isChangeingWorkSpace &&
+        !isLoading &&
         !isFetchingNextPage &&
         !isFetching &&
-        data?.pages.flat().length === 0 && (
-          <View className="flex-1  justify-center items-center">
-            <Text className="text-text-secondary">No Chat Founed</Text>
-            <TouchableOpacity onPress={() => refetch()}>
-              <Text className="text-primary">Refresh</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-
-      {!isLoading &&
-        !isFetchingNextPage &&
-        !isFetching &&
-        data &&
-        data?.pages.flat().length > 0 && (
-          <FlatList
-            data={data?.pages.flat()}
-            renderItem={({ item }) => (
-              <Swipeable
-                oprations={oprations}
-                itemId={item._id}
-                closeRow={handleClose}
-                contactId={contactId}
-                setContactId={setContactId}
-              >
-                <ConatactCard
-                  item={item}
-                  onPress={async () => {
-                    runOnce(async () => {
-                      router.push({
-                        pathname: `/(app)/(session)/ChatScreen`,
-                        params: {
-                          sessionId: item._id,
-                        },
-                      });
-
-                      setCurrentContact({
-                        ...item.userData,
-                        platform: item.platform,
-                        status: item.status,
-                      });
+        data?.pages.flat().length === 0 &&
+        !isChangeingWorkSpace ? (
+        <View className="flex-1  justify-center items-center">
+          <Text className="text-text-secondary">No Chat Founed</Text>
+          <TouchableOpacity onPress={() => refetch()}>
+            <Text className="text-primary">Refresh</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <FlatList
+          data={data?.pages.flat()}
+          renderItem={({ item }) => (
+            <Swipeable
+              oprations={oprations}
+              itemId={item._id}
+              closeRow={handleClose}
+              contactId={contactId}
+              setContactId={setContactId}
+            >
+              <ConatactCard
+                item={item}
+                onPress={async () => {
+                  runOnce(async () => {
+                    router.push({
+                      pathname: `/(app)/(session)/ChatScreen`,
+                      params: {
+                        sessionId: item._id,
+                      },
                     });
-                  }}
-                />
-              </Swipeable>
-            )}
-            refreshControl={
-              <RefreshControl
-                refreshing={isLoading}
-                onRefresh={() => refetch()}
+
+                    setCurrentContact({
+                      ...item.userData,
+                      platform: item.platform,
+                      status: item.status,
+                    });
+                  });
+                }}
               />
-            }
-            onEndReached={() => hasNextPage && fetchNextPage()}
-            onEndReachedThreshold={0.5}
-          />
-        )}
+            </Swipeable>
+          )}
+          refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={() => refetch()}
+            />
+          }
+          onEndReached={() => hasNextPage && fetchNextPage()}
+          onEndReachedThreshold={0.5}
+        />
+      )}
     </View>
   );
 };

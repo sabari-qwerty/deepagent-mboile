@@ -6,12 +6,16 @@ import { router } from "expo-router";
 import { FC } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Devider } from "../common/devider";
+import { useSocket } from "../provider/socket";
 
 interface prop {
   close: () => void;
 }
 
 export const CustomDrawerHeader: FC<prop> = ({ close }) => {
+
+
+
   return (
     <>
       <View className="py-4  justify-center items-center">
