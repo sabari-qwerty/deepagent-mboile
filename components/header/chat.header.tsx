@@ -29,8 +29,6 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
     ChatScreenContext
   ) as ChatScreenContextProp;
 
-
-
   return (
     <View className="w-full  bg-white">
       {userData === null && (
@@ -47,7 +45,7 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
               <Icons.LeftArrow />
 
               <ConatactAvatar
-                imageId={userData?.imageId ?? ""}
+                imageId={userData?.imageId ?? "PxYMze1T"}
                 platform={userData?.platform ?? "whatsapp"}
               />
             </TouchableOpacity>
@@ -68,7 +66,7 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
             >
               <View className="w-full h-full  justify-center">
                 <Text className="text-lg text-text-primary capitalize ">
-                  {userData?.name}
+                  {userData?.name ?? "Try-demo"}
                 </Text>
 
                 {false && (
