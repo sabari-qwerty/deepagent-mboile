@@ -1,9 +1,19 @@
 import { useAuth } from "@/hooks/useAuth";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Text } from "react-native";
 
-export const AuthError: FC = () => {
+interface prop {
+  setIsLoading: (value: boolean) => void;
+}
+
+export const AuthError: FC<prop> = ({ setIsLoading }) => {
   const { error } = useAuth();
+
+  useEffect(() => {
+    if (error) {
+      setIsLoading(false);
+    }
+  }, [error]);
 
   return (
     error && (

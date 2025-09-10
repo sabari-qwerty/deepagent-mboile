@@ -1,18 +1,17 @@
 import { useAuth } from "@/hooks/useAuth";
-import { queryClient } from "@/tanstack-query";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
-export const LoginButton: FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
+interface prop {
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+}
+
+export const LoginButton: FC<prop> = ({ setIsLoading, isLoading }) => {
   const { handleLogin } = useAuth();
 
   const Login = () => {
     handleLogin({ setValue: (value) => setIsLoading(value) });
-    queryClient.invalidateQueries({ queryKey: ["workspace"] });
-    queryClient.fetchQuery({ queryKey: ["workspace"] });
-    queryClient.refetchQueries({ queryKey: ["workspace"] });
-    queryClient.clear();
   };
 
   return (

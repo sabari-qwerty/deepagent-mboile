@@ -10,6 +10,7 @@ export enum StorageKeys {
   tags = "@tags",
   teamId = "@teamId",
   assignee = "@assignee",
+  fcmToken = "@fcmToken",
 }
 
 // Event system for storage changes

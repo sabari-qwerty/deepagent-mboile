@@ -172,6 +172,10 @@ const ExitIcon: FC<prop> = ({ color, size = 18 }) => {
   return <MaterialCommunityIcons name="exit-run" size={size} color={color} />;
 };
 
+const CopyIcon: FC<prop> = ({ color, size = 18 }) => {
+  return <Feather name="copy" size={size} color={color} />;
+};
+
 export const Icons = {
   SearchIcon,
   FilterIcon,
@@ -221,4 +225,5 @@ export const Icons = {
   Mail: MailIcon,
   Group: GroupIcon,
   Exit: ExitIcon,
+  copy: CopyIcon,
 };

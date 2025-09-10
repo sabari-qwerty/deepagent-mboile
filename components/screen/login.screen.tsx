@@ -1,11 +1,12 @@
 import { Hero, Logo, Path } from "@/constants/image";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import { LoginButton } from "../button/login.button";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
 import { AuthError } from "../error/auth.error";
 
 export const LoginScreen: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <CustomSafeAreaView background="blue">
       <ScrollView
@@ -30,7 +31,7 @@ export const LoginScreen: FC = () => {
           <View className="relative mt-5">
             <Text className="text-2xl font-bold text-center text-black">
               Discover Endless{"\n"}
-              Possibilities with{" "}
+              Possibilities with
               <Text className="text-secondary-100">DeepAgent</Text>
             </Text>
             <Image
@@ -44,8 +45,8 @@ export const LoginScreen: FC = () => {
             Exploration with DeepAgent
           </Text>
 
-          <LoginButton />
-          <AuthError />
+          <LoginButton isLoading={isLoading} setIsLoading={setIsLoading} />
+          <AuthError setIsLoading={setIsLoading} />
         </View>
       </ScrollView>
     </CustomSafeAreaView>
