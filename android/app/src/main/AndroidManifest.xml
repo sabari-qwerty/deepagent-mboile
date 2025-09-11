@@ -40,6 +40,7 @@
         <data android:scheme="com.gozen.deepagent.auth0" android:host="optinly.auth0.com"/>
         <data android:scheme="com.gozen.deepagent.auth0" android:host="optinly.auth0.com"/>
         <data android:scheme="com.gozen.deepagent.auth0" android:host="optinly.auth0.com"/>
+        <data android:scheme="com.gozen.deepagent.auth0" android:host="optinly.auth0.com"/>
       </intent-filter>
     </activity>
   </application>
