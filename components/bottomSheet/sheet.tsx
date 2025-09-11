@@ -22,7 +22,7 @@ export const CustomBottomSheet: FC<CustomBottomSheetProp> = ({
         display: "none",
       }}
       backgroundStyle={{
-        backgroundColor: "#00000029",
+        backgroundColor: "#00000020",
       }}
     >
       {children}

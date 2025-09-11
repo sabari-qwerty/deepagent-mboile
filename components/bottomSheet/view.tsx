@@ -40,7 +40,9 @@ export const CustomBottomSheetView: FC<CustomBottomViewProp> = ({
           <View
             ref={viewRef}
             className="w-full h-fit "
-            style={{ backgroundColor: "#0000" }}
+            style={{
+              backgroundColor: "black",
+            }}
           >
             {children}
           </View>
