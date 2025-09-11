@@ -25,7 +25,7 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
 
   const { sessionId } = useLocalSearchParams();
 
-  const { messages, setMessages } = useContext(
+  const { messages, setMessages, isTyping } = useContext(
     ChatScreenContext
   ) as ChatScreenContextProp;
 
@@ -69,7 +69,7 @@ export const ChatHeader: FC<prop> = ({ isNavigate }) => {
                   {userData?.name ?? "Try-demo"}
                 </Text>
 
-                {false && (
+                {isTyping && (
                   <Text className="text-text-secondary text-sm">
                     Typing ....
                   </Text>

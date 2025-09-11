@@ -38,6 +38,7 @@ async function handleNotificationNavigation({
   setActiveFilter,
   setActiveWorkspaceId,
   setAllWorkSpace,
+  router,
 }: {
   message: FirebaseMessagingTypes.RemoteMessage;
   setActiveWorkspaceId: (workspaceId: string) => void;
@@ -46,8 +47,8 @@ async function handleNotificationNavigation({
   acitveWorkspaceId: string;
   allWorkSpace: any;
   activeFilter: any;
+  router: ReturnType<typeof useRouter>;
 }) {
-  const router = useRouter();
   const payload = message.data;
 
   const { sessionId, workspaceId } = payload as {
@@ -64,7 +65,11 @@ async function handleNotificationNavigation({
   );
 
   if (selectWorkspace.length === 0) {
-    router.replace("/workspace");
+    try {
+      router.replace("/(app)/(session)/workspace");
+    } catch (error) {
+      console.log({ error });
+    }
   }
 
   await Storage.set(StorageKeys.activeWorkspaceId, selectWorkspace[0].id);
@@ -95,6 +100,7 @@ async function handleNotificationNavigation({
 }
 
 export default function RootLayout() {
+  const router = useRouter();
   const [acitveWorkspaceId, setActiveWorkspaceId] = useStorage(
     StorageKeys.activeWorkspaceId
   );
@@ -129,6 +135,7 @@ export default function RootLayout() {
           acitveWorkspaceId: acitveWorkspaceId as string,
           allWorkSpace,
           activeFilter,
+          router,
         });
       }
 
@@ -144,6 +151,7 @@ export default function RootLayout() {
             acitveWorkspaceId: acitveWorkspaceId as string,
             allWorkSpace,
             activeFilter,
+            router,
           });
         }
       });
