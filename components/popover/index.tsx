@@ -33,6 +33,9 @@ export const ChatScreenPopover: FC = () => {
       services.status.update(payload),
     onSuccess: async () => {
       ToastAndroid.show("Status updated", ToastAndroid.SHORT);
+
+    
+
       // Invalidate all contact-related queries except the current one
       await queryClient.refetchQueries({
         predicate: (query) => {

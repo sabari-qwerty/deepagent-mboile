@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils/cn";
 import { Children } from "@/types/type";
 import { useFocusEffect } from "expo-router";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useEffect } from "react";
 import { AppState, AppStateStatus, StatusBar } from "react-native";
 import { SafeAreaView as RNFSafeAreaView } from "react-native-safe-area-context";
 
@@ -19,7 +19,7 @@ export const CustomSafeAreaView: FC<CustomSafeAreaViewProps> = ({
     StatusBar.setBackgroundColor(background === "blue" ? "#0048e6" : "#000000");
     StatusBar.setBarStyle("light-content");
     StatusBar.setTranslucent(true);
-  }, []);
+  }, [background]);
 
   // Handle screen focus
   useFocusEffect(
@@ -41,6 +41,18 @@ export const CustomSafeAreaView: FC<CustomSafeAreaViewProps> = ({
       };
     }, [setStatusBarStyle])
   );
+
+  // Set initial status bar style on mount
+  useEffect(() => {
+    setStatusBarStyle();
+
+    return () => {
+      // Reset to default status bar style on unmount
+      StatusBar.setBackgroundColor("transparent");
+      StatusBar.setBarStyle("default");
+      StatusBar.setTranslucent(true);
+    };
+  }, [setStatusBarStyle]);
 
   return (
     <RNFSafeAreaView
