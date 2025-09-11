@@ -26,6 +26,8 @@ export const MakeAsAssignee: FC = () => {
     StorageKeys.contactData
   );
 
+  const [tags] = useStorage(StorageKeys.tags);
+
   const { data: assingeeData } = useQuery({
     queryKey: ["assignee", teamId, activeWorkspaceId],
     queryFn: () =>
@@ -55,8 +57,11 @@ export const MakeAsAssignee: FC = () => {
       "chat",
       sessionId,
     ]) as ChatSession;
-
     queryData.assignedPerson = payload.email;
+
+    if (queryData.tags) {
+      queryData.tags = Array.isArray(tags) ? tags : [];
+    }
 
     queryClient.setQueryData(["chat", sessionId], queryData);
   };

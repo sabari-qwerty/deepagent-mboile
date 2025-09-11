@@ -34,7 +34,7 @@ export const CustomerTag: FC = () => {
       services.contact.tag.add({
         ...payload,
       }),
-    onSuccess: () => {
+    onSuccess: async () => {
       ToastAndroid.show("Tag added", ToastAndroid.SHORT);
     },
   });
