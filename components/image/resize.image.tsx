@@ -16,7 +16,7 @@ export const ResizeImage: FC<props> = ({ imageUrl }) => {
     <View
       className={`w-[240px] ${
         isVertical ? "h-[240px]" : "h-[135px]"
-      } bg-black rounded-md`}
+      } bg-black/40 rounded-md`}
     >
       <Image source={{ uri: imageUrl }} className="w-full h-full rounded-md" />
     </View>

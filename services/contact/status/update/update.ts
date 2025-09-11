@@ -3,9 +3,13 @@ import api from "@/axios";
 import { StatusUpdatePayload } from "@/types/type";
 
 export const updateStatus = async ({ ...props }: StatusUpdatePayload) => {
-  const resposne = await api.put(endpoints.updateStatus, {
-    ...props,
-  });
+  try {
+    const resposne = await api.put(endpoints.updateStatus, {
+      ...props,
+    });
 
-  return resposne.data;
+    return resposne.data;
+  } catch (error) {
+    throw error;
+  }
 };

@@ -207,7 +207,7 @@ export const ChatList: FC = () => {
           renderItem={({ item }: { item: MessagesResponse }) => {
             return <BabuleRoute item={item} />;
           }}
-          keyExtractor={(item, index) => String(index)}
+          keyExtractor={(item, index) => `${item.id}-${index}`}
           inverted
           className="flex-1 "
           refreshControl={

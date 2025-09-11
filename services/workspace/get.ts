@@ -3,8 +3,12 @@ import api from "@/axios";
 import { Workspace } from "@/types/type";
 
 const workspaceGet = async (): Promise<Workspace[]> => {
-  const response = await api.get(endpoints.workspace);
-  return response.data;
+  try {
+    const response = await api.get(endpoints.workspace);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default workspaceGet;

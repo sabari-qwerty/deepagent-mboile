@@ -7,15 +7,19 @@ const statusGet = async ({
 }: {
   workspaceId: string;
 }): Promise<GetStatusResponse> => {
-  const response = (await api.get(endpoints.status + workspaceId))
-    .data as GetStatusRequestResposne;
+  try {
+    const response = (await api.get(endpoints.status + workspaceId))
+      .data as GetStatusRequestResposne;
 
-  return {
-    general: response.general,
-    mentioned: response.mentioned,
-    openChats: response["open-chats"],
-    unassigned: response.unassigned,
-  };
+    return {
+      general: response.general,
+      mentioned: response.mentioned,
+      openChats: response["open-chats"],
+      unassigned: response.unassigned,
+    };
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default statusGet;

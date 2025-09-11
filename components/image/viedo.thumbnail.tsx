@@ -25,9 +25,10 @@ export const ViedoThumbnail: FC<props> = ({ url }) => {
   }, [url]);
 
   return (
-    <View className="w-fit  relative">
+    <View className="w-fit  relative  ">
       <ResizeImage imageUrl={imgUrl ?? ""} />
-      <View className="absolute top-0 left-0 w-full h-full rounded-md bg-black/20 items-center justify-center">
+
+      <View className="absolute top-0 left-0 w-full h-full rounded-md  items-center justify-center">
         <Icons.PlayButtonIcon color="#fff" />
       </View>
     </View>
