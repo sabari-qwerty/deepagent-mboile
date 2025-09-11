@@ -5,15 +5,13 @@ import { services } from "@/services";
 import { localWorkspace, Workspace } from "@/types/type";
 import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { CustomSafeAreaView } from "../container/custom.safe.areya";
 import { WorkspaceFlatList } from "../FlatList/workspace.flat.list";
 import { WorkSpaceHeader } from "../header/work.space.header";
 
 export const WorkSpaceScreen: FC = () => {
-  const [isNext, setIsNext] = useState(false);
-
   const { handleLogout } = useAuth();
 
   const { data, isLoading, refetch } = useQuery<Workspace[]>({
@@ -48,13 +46,6 @@ export const WorkSpaceScreen: FC = () => {
     }
   };
 
-  useEffect(() => {
-    const temp = allWorkspaces ?? [];
-    const workspace = tempWorkspace ?? [];
-
-    setIsNext(String(temp) !== String(workspace));
-  }, [tempWorkspace]);
-
   const handleSelectAll = () => {
     if (data) {
       const mappedWorkspaces: localWorkspace[] = data.map((workspace) => ({
@@ -74,7 +65,6 @@ export const WorkSpaceScreen: FC = () => {
     router.replace("/(app)/(session)");
 
     setTimeout(() => {
-      setIsNext(false);
       setTempWorkspace([]);
     }, 1000);
   };
@@ -89,7 +79,7 @@ export const WorkSpaceScreen: FC = () => {
         <View className="flex-1 gap-y-4">
           {data && data.length > 0 && (
             <WorkSpaceHeader
-              isNext={isNext}
+              isNext={tempWorkspace.length > 0}
               handleSelectAll={handleSelectAll}
               handleNext={handleNext}
             />

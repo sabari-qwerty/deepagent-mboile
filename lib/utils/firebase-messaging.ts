@@ -41,6 +41,7 @@ export async function setupBackgroundHandler() {
     console.log("Message handled in the background!", remoteMessage);
 
     // Convert Firebase message to Expo notification format
+
     await Notifications.scheduleNotificationAsync({
       content: {
         title: remoteMessage.notification?.title || "New Message",

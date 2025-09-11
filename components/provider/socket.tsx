@@ -47,8 +47,6 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
       },
     });
 
-    console.log({ accessToken });
-
     // Socket event listeners
     newSocket.on("connect", () => {
       console.log("Socket connected");

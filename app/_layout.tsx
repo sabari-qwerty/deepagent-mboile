@@ -1,6 +1,10 @@
 import { RootRouter } from "@/components/Router/root";
+import { useStorage } from "@/hooks/useStorage";
 import { initializeFirebaseMessaging } from "@/lib/utils/firebase-messaging";
 import { requestNotificationPermission } from "@/lib/utils/request_preimssion";
+import { Storage, StorageKeys } from "@/lib/utils/storage";
+import { services } from "@/services";
+import { localWorkspace } from "@/types/type";
 import messaging, {
   FirebaseMessagingTypes,
 } from "@react-native-firebase/messaging";
@@ -26,18 +30,77 @@ async function getFcmToken() {
   return token;
 }
 
-function handleNotificationNavigation(
-  message: FirebaseMessagingTypes.RemoteMessage
-) {
+async function handleNotificationNavigation({
+  message,
+  acitveWorkspaceId,
+  activeFilter,
+  allWorkSpace,
+  setActiveFilter,
+  setActiveWorkspaceId,
+  setAllWorkSpace,
+}: {
+  message: FirebaseMessagingTypes.RemoteMessage;
+  setActiveWorkspaceId: (workspaceId: string) => void;
+  setAllWorkSpace: (allWorkSpace: any) => void;
+  setActiveFilter: (activeFilter: any) => void;
+  acitveWorkspaceId: string;
+  allWorkSpace: any;
+  activeFilter: any;
+}) {
   const router = useRouter();
-  const screen = message.data?.screen;
+  const payload = message.data;
 
-  if (screen) {
-    router.push(screen as any);
+  const { sessionId, workspaceId } = payload as {
+    sessionId: string;
+    workspaceId: string;
+  };
+
+  const allWorkSpaces = (await Storage.get(
+    StorageKeys.allWorkspaces
+  )) as localWorkspace[];
+
+  const selectWorkspace = allWorkSpaces.filter(
+    (workspace) => workspace.id === workspaceId
+  );
+
+  if (selectWorkspace.length === 0) {
+    router.replace("/workspace");
+  }
+
+  await Storage.set(StorageKeys.activeWorkspaceId, selectWorkspace[0].id);
+  await Storage.set(StorageKeys.activeWorkspace, selectWorkspace[0]);
+
+  try {
+    const chat = await services.contact.chat.get({
+      sessionId,
+    });
+
+    const data = {
+      ...chat.userData,
+      platform: chat.platform,
+      status: chat.status,
+    };
+
+    await Storage.set(StorageKeys.contactData, data);
+
+    router.push({
+      pathname: "/(app)/(session)/ChatScreen",
+      params: {
+        sessionId,
+      },
+    });
+  } catch (error) {
+    console.error(error);
   }
 }
 
 export default function RootLayout() {
+  const [acitveWorkspaceId, setActiveWorkspaceId] = useStorage(
+    StorageKeys.activeWorkspaceId
+  );
+  const [allWorkSpace, setAllWorkSpace] = useStorage(StorageKeys.allWorkspaces);
+  const [activeFilter, setActiveFilter] = useStorage(StorageKeys.activeFilter);
+
   useEffect(() => {
     let unsubscribeForeground: () => void;
 
@@ -58,14 +121,30 @@ export default function RootLayout() {
       const initialNotification = await messaging().getInitialNotification();
       if (initialNotification) {
         console.log("App opened from quit state:", initialNotification);
-        handleNotificationNavigation(initialNotification);
+        handleNotificationNavigation({
+          message: initialNotification,
+          setActiveWorkspaceId,
+          setAllWorkSpace,
+          setActiveFilter,
+          acitveWorkspaceId: acitveWorkspaceId as string,
+          allWorkSpace,
+          activeFilter,
+        });
       }
 
       // Handle when app is opened from background state
       messaging().onNotificationOpenedApp((remoteMessage) => {
         if (remoteMessage) {
           console.log("App opened from background state:", remoteMessage);
-          handleNotificationNavigation(remoteMessage);
+          handleNotificationNavigation({
+            message: remoteMessage,
+            setActiveWorkspaceId,
+            setAllWorkSpace,
+            setActiveFilter,
+            acitveWorkspaceId: acitveWorkspaceId as string,
+            allWorkSpace,
+            activeFilter,
+          });
         }
       });
 

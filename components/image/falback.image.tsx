@@ -1,6 +1,5 @@
 import { Image } from "expo-image";
-import { useFocusEffect } from "expo-router";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 interface props {
   imageUrl: string;
@@ -9,11 +8,11 @@ interface props {
 export const FallBackImage: FC<props> = ({ imageUrl }) => {
   const [isError, setIsError] = useState<boolean>(false);
 
-  useFocusEffect(() => {
+  useEffect(() => {
     if (isError) {
       setIsError(false);
     }
-  });
+  }, []);
 
   return (
     <Image
