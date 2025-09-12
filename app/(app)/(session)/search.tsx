@@ -13,10 +13,10 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 
 const SearchScreen: FC = () => {
   const [search, setSearch] = useState("");
@@ -44,20 +44,26 @@ const SearchScreen: FC = () => {
     <CustomSafeAreaView className="bg-white" background="blue">
       <KeyboardAvoidingView
         behavior={"padding"}
-        className="flex-1 w-fll h-full"
+        className="flex-1 w-full h-full"
       >
-        <View className="w-[95%] mx-auto gap-y-4  h-full flex-1  py-4 ">
-          <View className="flex flex-row items-center gap-x-2  bg-[#F9FAFB] rounded-md px-2 overflow-hidden">
-            <Icons.SearchIcon />
-            <TextInput
-              value={search}
-              placeholder="Search..."
-              placeholderTextColor={"#888e9b"}
-              className=" w-full h-12 flex-1 rounded-md text-[#888e9b] "
-              onChangeText={setSearch}
-            />
+        <View className="w-[95%] mx-auto gap-y-4 h-full flex-1 py-4 items-center">
+          <View className="w-full flex-row items-center gap-x-2">
+            <TouchableOpacity onPress={() => router.back()} className="p-2">
+              <Icons.BackArrowIcon color="#06152d" />
+            </TouchableOpacity>
+            <View className="flex-1 flex-row items-center gap-x-2 bg-[#F9FAFB] rounded-md px-3 py-2 overflow-hidden">
+              <Icons.SearchIcon />
+              <TextInput
+                value={search}
+                placeholder="Search..."
+                placeholderTextColor={"#888e9b"}
+                className="flex-1 h-10 text-[#06152d]"
+                onChangeText={setSearch}
+              />
+            </View>
           </View>
-          <View className="gap-y-4 ">
+
+          <View className="gap-y-4  ">
             <Text className="text-base font-medium text-text-primary">
               Conversation
             </Text>
